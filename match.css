@@ -1,0 +1,48 @@
+.buttons{
+    color:#000;
+    font-size:200%;
+    height:75px;
+    width:75px
+}
+.color0{
+    background:#c83232
+}
+.color1{
+    background:#ff7d0a
+}
+.color2{
+    background:#2d8930
+}
+.color3{
+    background:#6cd
+}
+.color4{
+    background:#f58cba
+}
+.color5{
+    background:#476291
+}
+.color6{
+    background:#fd0
+}
+.color7{
+    background:#8650ac
+}
+.color8{
+    background:#c79c6e
+}
+.color9{
+    background:#70550f
+}
+.color10{
+    background:#000
+}
+.settings-td{
+    padding:9px;
+    text-align:left;
+    width:50%
+}
+table{
+    border-collapse:collapse;
+    text-align:center
+}
