@@ -82,7 +82,7 @@ function save(){
     i = 4;
     j = ['audio-volume','max-time','y-margin','display-select','start-key'];
     do{
-        if(get(j[i]).value===[1,0,0,1,'H'][i]){
+        if(get(j[i]).value==[1,0,0,1,'H'][i]){
             ls.removeItem('match'+i)
         }else{
             ls.setItem('match'+i,get(j[i]).value)
