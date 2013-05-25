@@ -20,7 +20,10 @@ function button_click(button_id){
         }while(i--);
 
         /*store button information*/
-        selected_button = [button_values[button_id],button_id];
+        selected_button = [
+            button_values[button_id],
+            button_id
+        ];
 
         /*disable this button to prevent reclicks*/
         get(button_id).disabled = 1
@@ -42,7 +45,10 @@ function button_click(button_id){
             }
         }while(i--);
 
-        selected_button = [-1,-1];
+        selected_button = [
+            -1,
+            -1
+        ];
 
         /*if not, end game*/
         if(x){
@@ -85,7 +91,13 @@ function reset(){
 function save(){
     /*save settings into localStorage if they differ from settings, else forget*/
     i = 4;
-    j = ['audio-volume','max-time','y-margin','display-select','start-key'];
+    j = [
+        'audio-volume',
+        'max-time',
+        'y-margin',
+        'display-select',
+        'start-key'
+    ];
     do{
         if(get(j[i]).value == [1,0,0,1,'H'][i]){
             ls.removeItem('match' + i)
@@ -105,7 +117,11 @@ function showhide(){
 function start(){
     /*validate settings*/
     i = 2;
-    j = ['audio-volume','max-time','y-margin'];
+    j = [
+        'audio-volume',
+        'max-time',
+        'y-margin'
+    ];
     do{
         if(isNaN(get(j[i]).value) || get(j[i]).value < 0){
             get(j[i]).value = [1,0,0][i]
@@ -142,7 +158,9 @@ function start(){
     get('start-button').onclick = function(){stop()};
 
     /*disable settings to prevent editing*/
-    get('display-select').disabled = get('reset-button').disabled = get('max-time').disabled = 1;
+    get('display-select').disabled = 1;
+    get('max-time').disabled = 1;
+    get('reset-button').disabled = 1;
 
     /*display time limit if it is greater than 0*/
     if(get('max-time').value > 0){
@@ -170,21 +188,43 @@ function stop(){
     }while(i--);
 
     /*blank out button values*/
-    tempinfo = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
-    button_values = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+    tempinfo = [
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1
+    ];
+    button_values = [
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1,
+        -1,-1,-1,-1,-1
+    ];
     selected_buttons = [-1,-1];
 
     /*enable settings to allow editing*/
-    get('display-select').disabled = get('reset-button').disabled = get('max-time').disabled = 0
+    get('display-select').disabled = 0;
+    get('max-time').disabled = 0;
+    get('reset-button').disabled = 0
 }
 
-var button_values = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var button_values = [
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1
+];
 var i = 0;
 var interval = 0;
 var j = [''];
 var ls = window.localStorage;
 var selected_button = [-1,-1];
-var tempinfo = [-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1];
+var tempinfo = [
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1,
+    -1,-1,-1,-1,-1
+];
 
 /*setup buttons in game-area*/
 for(i = 0; i < 20; i++){
@@ -198,9 +238,9 @@ j = 0;
 
 /*setup settings, get values from localStorage if they are set*/
 get('audio-volume').value = ls.getItem('match0') === null ? 1 : parseFloat(ls.getItem('match0'));
+get('display-select').value = ls.getItem('match3') === null ? 1 : 0;
 get('max-time').value = ls.getItem('match1') === null ? 0 : parseInt(ls.getItem('match1'));
 get('y-margin').value = ls.getItem('match2') === null ? 0 : parseInt(ls.getItem('match2'));
-get('display-select').value = ls.getItem('match3') === null ? 1 : 0;
 
 /*set value of start-key if saved into localStorage*/
 if(ls.getItem('match4') === null){
