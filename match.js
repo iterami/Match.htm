@@ -33,7 +33,8 @@ function button_click(button_id){
         /*if value of this button matches the value of the previously selected button*/
         if(selected_button[0] === button_values[button_id]){
             /*set button values to 0 to prevent them from being reset*/
-            button_values[selected_button[1]] = button_values[button_id] = -1;
+            button_values[button_id] = -1;
+            button_values[selected_button[1]] = -1;
         }
 
         /*check if there are any enabled buttons left*/
@@ -81,9 +82,11 @@ function play_audio(i){
 
 function reset(){
     if(confirm('Reset settings?')){
-        get('display-select').value = get('audio-volume').value = 1;
+        get('audio-volume').value = 1;
+        get('display-select').value = 1;
+        get('max-time').value = 0;
         get('start-key').value = 'H';
-        get('max-time').value = get('y-margin').value = 0;
+        get('y-margin').value = 0;
         save()
     }
 }
@@ -256,6 +259,7 @@ get('lol-a-table').style.marginTop = get('y-margin').value + 'px';
 window.onkeydown = function(e){
     i = window.event ? event : e;
     i = i.charCode ? i.charCode : i.keyCode;
+
     if(String.fromCharCode(i) === get('start-key').value){
         stop();
         start()
