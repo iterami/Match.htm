@@ -167,7 +167,7 @@ function start(){
         button_values[i] = Math.floor(temp / 2);
     }while(i--);
 
-    document.getElementById('start-button').value = 'End (ESC)';
+    document.getElementById('start-button').value = 'End [ESC]';
     document.getElementById('start-button').onclick = function(){
         stop();
     };
@@ -195,7 +195,7 @@ function start(){
 function stop(){
     clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start (' + document.getElementById('start-key').value + ')';
+    document.getElementById('start-button').value = 'Start [' + document.getElementById('start-key').value + ']';
     document.getElementById('start-button').onclick = function(){
         start();
     };
@@ -274,7 +274,7 @@ if(window.localStorage.getItem('match-4') === null){
 
 }else{
     document.getElementById('start-key').value = window.localStorage.getItem('match-4');
-    document.getElementById('start-button').value = 'Start (' + window.localStorage.getItem('match-4') + ')';
+    document.getElementById('start-button').value = 'Start [' + window.localStorage.getItem('match-4') + ']';
 }
 
 // set y margin of table based on settings
