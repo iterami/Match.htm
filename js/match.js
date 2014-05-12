@@ -9,16 +9,17 @@ function button_click(button_id){
       '~!@#$%^&*('[button_values[button_id]]
     ][document.getElementById('display-select').value];
 
-    i = 19;
+    var loop_counter = 19;
     if(selected_button[0] === -1){// if this is first button of button pair
         // reset other buttons that haven't been matched yet
         do{
-            if(button_values[i] > -1 && i !== button_id){
-                document.getElementById(i).classList.remove('color' + button_values[i]);
-                document.getElementById(i).classList.add('color10');
-                document.getElementById(i).value = '-';
+            if(button_values[loop_counter] > -1
+              && loop_counter !== button_id){
+                document.getElementById(loop_counter).classList.remove('color' + button_values[loop_counter]);
+                document.getElementById(loop_counter).classList.add('color10');
+                document.getElementById(loop_counter).value = '-';
             }
-        }while(i--);
+        }while(loop_counter--);
 
         // store button information
         selected_button = [
@@ -28,6 +29,7 @@ function button_click(button_id){
 
         // disable this button to prevent reclicks
         document.getElementById(button_id).disabled = 1;
+
     }else{
         document.getElementById('attempted-matches').innerHTML =
           parseInt(document.getElementById('attempted-matches').innerHTML) + 1;
@@ -42,11 +44,14 @@ function button_click(button_id){
         // check if there are any enabled buttons left
         var x = 1;
         do{
-            document.getElementById(i).disabled = button_values[i] < 0 ? 1 : 0;
-            if(!document.getElementById(i).disabled){
+            document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
+              ? 1
+              : 0;
+
+            if(!document.getElementById(loop_counter).disabled){
                 x = 0;
             }
-        }while(i--);
+        }while(loop_counter--);
 
         selected_button = [
           -1,
@@ -63,12 +68,16 @@ function button_click(button_id){
 function decisecond(){
     // if max-time is set, decrease time by .1sec, else add .1sec
     document.getElementById('time').innerHTML = (
-        parseFloat(document.getElementById('time').innerHTML)
-        + (document.getElementById('max-time').value > 0 ? -.1 : .1)
-      ).toFixed(1);
+      parseFloat(document.getElementById('time').innerHTML)
+      + (document.getElementById('max-time').value > 0
+        ? -.1
+        : .1
+      )
+    ).toFixed(1);
 
     // if time can run out, check if game over
-    if(document.getElementById('max-time').value > 0 && document.getElementById('time').innerHTML <= 0){
+    if(document.getElementById('max-time').value > 0
+      && document.getElementById('time').innerHTML <= 0){
         stop();
     }
 }
@@ -95,7 +104,6 @@ function reset(){
 
 function save(){
     // save settings into localStorage if they differ from settings, else forget
-    i = 4;
     j = [
       'audio-volume',
       'max-time',
@@ -103,43 +111,50 @@ function save(){
       'display-select',
       'start-key'
     ];
+    var loop_counter = 4;
     do{
-        if(document.getElementById(j[i]).value == [1, 0, 0, 1, 'H'][i]){
-            window.localStorage.removeItem('match-' + i);
+        if(document.getElementById(j[loop_counter]).value == [1, 0, 0, 1, 'H'][loop_counter]){
+            window.localStorage.removeItem('match-' + loop_counter);
 
         }else{
             window.localStorage.setItem(
-              'match-' + i,
-              document.getElementById(j[i]).value
+              'match-' + loop_counter,
+              document.getElementById(j[loop_counter]).value
             );
         }
-    }while(i--);
+    }while(loop_counter--);
     j = 0;
 }
 
 function showhide(){
-    i = document.getElementById('showhide-button').value === '-' ? 1 : 0;
-    document.getElementById('settings-span').style.display = ['inline', 'none'][i];
-    document.getElementById('showhide-button').value = ['-', '+'][i];
+    if(document.getElementById('showhide-button').value === '-'){
+        document.getElementById('settings-span').style.display = 'none';
+        document.getElementById('showhide-button').value = '+';
+
+    }else{
+        document.getElementById('settings-span').style.display = 'inline';
+        document.getElementById('showhide-button').value = '-';
+    }
 }
 
 function start(){
     // validate settings
-    i = 2;
     j = [
       'audio-volume',
       'max-time',
       'y-margin'
     ];
+    var loop_counter = 2;
     do{
-        if(isNaN(document.getElementById(j[i]).value) || document.getElementById(j[i]).value < 0){
-            document.getElementById(j[i]).value = [
+        if(isNaN(document.getElementById(j[loop_counter]).value)
+          || document.getElementById(j[loop_counter]).value < 0){
+            document.getElementById(j[loop_counter]).value = [
               1,
               0,
               0
-            ][i];
+            ][loop_counter];
         }
-    }while(i--);
+    }while(loop_counter--);
 
     // set y margin of table based on settings
     document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
@@ -147,25 +162,25 @@ function start(){
     var temp = document.getElementById('attempted-matches').innerHTML = 0;
 
     // generate hidden button pairs
-    i = 19;
+    loop_counter = 19;
     do{
-        document.getElementById(i).disabled = 0;
+        document.getElementById(loop_counter).disabled = 0;
 
         j = 9;
         do{
-            document.getElementById(i).classList.remove('color' + j);
+            document.getElementById(loop_counter).classList.remove('color' + j);
         }while(j--);
 
-        document.getElementById(i).classList.add('color10');
-        document.getElementById(i).value = '-';
+        document.getElementById(loop_counter).classList.add('color10');
+        document.getElementById(loop_counter).value = '-';
 
         do{
             temp = Math.floor(Math.random() * 20);
         }while(tempinfo[temp] != -1);
 
         tempinfo[temp] = Math.floor(temp / 2);
-        button_values[i] = Math.floor(temp / 2);
-    }while(i--);
+        button_values[loop_counter] = Math.floor(temp / 2);
+    }while(loop_counter--);
 
     document.getElementById('start-button').value = 'End [ESC]';
     document.getElementById('start-button').onclick = function(){
@@ -188,8 +203,11 @@ function start(){
         document.getElementById('if-time-limit').style.display = 'none';
     }
 
-    interval = setInterval('decisecond()', 100);
-    save()
+    interval = setInterval(
+      'decisecond()',
+      100
+    );
+    save();
 }
 
 function stop(){
@@ -201,10 +219,10 @@ function stop(){
     };
 
     // disable all game-area buttons
-    i = 19;
+    var loop_counter = 19;
     do{
-        document.getElementById(i).disabled = 1;
-    }while(i--);
+        document.getElementById(loop_counter).disabled = 1;
+    }while(loop_counter--);
 
     // blank out button values
     tempinfo = [
@@ -219,7 +237,10 @@ function stop(){
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1
     ];
-    selected_buttons = [-1, -1];
+    selected_buttons = [
+      -1,
+      -1
+    ];
 
     // enable settings to allow editing
     document.getElementById('display-select').disabled = 0;
@@ -233,7 +254,6 @@ var button_values = [
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1
 ];
-var i = 0;
 var interval = 0;
 var j = [''];
 var selected_button = [-1,-1];
@@ -245,11 +265,17 @@ var tempinfo = [
 ];
 
 // setup buttons in game-area
-for(i = 0; i < 20; i++){
-    if(i % 5 === 0 && i !== 0){
+for(var loop_counter = 0; loop_counter < 20; loop_counter++){
+    if(loop_counter % 5 === 0
+      && loop_counter !== 0){
         j.push('<br>');
     }
-    j.push('<input class="buttons color10" disabled id=' + i + ' onclick=button_click(' + i + ') type=button value=->');
+    j.push('<input class="buttons color10" disabled id='
+      + loop_counter
+      + ' onclick=button_click('
+      + loop_counter
+      + ') type=button value=->'
+    );
 }
 document.getElementById('game-area').innerHTML = j.join('');
 j = 0;
@@ -281,14 +307,14 @@ if(window.localStorage.getItem('match-4') === null){
 document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
 window.onkeydown = function(e){
-    i = window.event ? event : e;
-    i = i.charCode ? i.charCode : i.keyCode;
+    var key = window.event ? event : e;
+    key = key.charCode ? key.charCode : key.keyCode;
 
-    if(String.fromCharCode(i) === document.getElementById('start-key').value){
+    if(String.fromCharCode(key) === document.getElementById('start-key').value){
         stop();
         start();
 
-    }else if(i === 27){// ESC
+    }else if(key === 27){// ESC
         stop();
     }
 };
