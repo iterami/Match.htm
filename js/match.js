@@ -104,26 +104,26 @@ function reset(){
 
 function save(){
     // save settings into localStorage if they differ from settings, else forget
-    j = [
-      'audio-volume',
-      'max-time',
-      'y-margin',
-      'display-select',
-      'start-key'
-    ];
     var loop_counter = 4;
     do{
-        if(document.getElementById(j[loop_counter]).value == [1, 0, 0, 1, 'H'][loop_counter]){
-            window.localStorage.removeItem('match-' + loop_counter);
+        var id = [
+          'audio-volume',
+          'max-time',
+          'y-margin',
+          'display-select',
+          'start-key',
+        ][loop_counter];
+
+        if(document.getElementById(id).value == [1, 0, 0, 1, 'H'][loop_counter]){
+            window.localStorage.removeItem('Match.htm-' + id);
 
         }else{
             window.localStorage.setItem(
-              'match-' + loop_counter,
-              document.getElementById(j[loop_counter]).value
+              'Match.htm-' + id,
+              document.getElementById(id).value
             );
         }
     }while(loop_counter--);
-    j = 0;
 }
 
 function showhide(){
@@ -281,26 +281,32 @@ document.getElementById('game-area').innerHTML = j.join('');
 j = 0;
 
 // setup settings, get values from localStorage if they are set
-document.getElementById('audio-volume').value = window.localStorage.getItem('match-0') === null
-  ? 1
-  : parseFloat(window.localStorage.getItem('match-0'));
-document.getElementById('display-select').value = window.localStorage.getItem('match-3') === null
-  ? 1
-  : 0;
-document.getElementById('max-time').value = window.localStorage.getItem('match-1') === null
-  ? 0
-  : parseInt(window.localStorage.getItem('match-1'));
-document.getElementById('y-margin').value = window.localStorage.getItem('match-2') === null
-  ? 0
-  : parseInt(window.localStorage.getItem('match-2'));
+document.getElementById('audio-volume').value =
+  window.localStorage.getItem('Match.htm-audio-volume') === null
+    ? 1
+    : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
+document.getElementById('display-select').value =
+  window.localStorage.getItem('Match.htm-display-select') === null
+    ? 1
+    : window.localStorage.getItem('Match.htm-display-select');
+document.getElementById('max-time').value =
+  window.localStorage.getItem('Match.htm-max-time') === null
+    ? 0
+    : parseInt(window.localStorage.getItem('Match.htm-max-time'));
+document.getElementById('y-margin').value =
+  window.localStorage.getItem('Match.htm-y-margin') === null
+    ? 0
+    : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
 
 // set value of start-key if saved into localStorage
-if(window.localStorage.getItem('match-4') === null){
+if(window.localStorage.getItem('Match.htm-start-key') === null){
     document.getElementById('start-key').value = 'H';
 
 }else{
-    document.getElementById('start-key').value = window.localStorage.getItem('match-4');
-    document.getElementById('start-button').value = 'Start [' + window.localStorage.getItem('match-4') + ']';
+    document.getElementById('start-key').value =
+      window.localStorage.getItem('Match.htm-start-key');
+    document.getElementById('start-button').value =
+      'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
 }
 
 // set y margin of table based on settings
