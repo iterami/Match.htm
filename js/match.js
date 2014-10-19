@@ -82,6 +82,57 @@ function decisecond(){
     }
 }
 
+function init(){
+    // setup settings, get values from localStorage if they are set
+    document.getElementById('audio-volume').value =
+      window.localStorage.getItem('Match.htm-audio-volume') === null
+        ? 1
+        : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
+    document.getElementById('display-select').value =
+      window.localStorage.getItem('Match.htm-display-select') === null
+        ? 1
+        : window.localStorage.getItem('Match.htm-display-select');
+    document.getElementById('max-time').value =
+      window.localStorage.getItem('Match.htm-max-time') === null
+        ? 0
+        : parseInt(window.localStorage.getItem('Match.htm-max-time'));
+    document.getElementById('y-margin').value =
+      window.localStorage.getItem('Match.htm-y-margin') === null
+        ? 0
+        : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
+
+    // set value of start-key if saved into localStorage
+    if(window.localStorage.getItem('Match.htm-start-key') === null){
+        document.getElementById('start-key').value = 'H';
+
+    }else{
+        document.getElementById('start-key').value =
+          window.localStorage.getItem('Match.htm-start-key');
+        document.getElementById('start-button').value =
+          'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
+    }
+
+    // set y margin of table based on settings
+    document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
+
+    // setup buttons in game-area
+    var output = [''];
+
+    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
+        if(loop_counter % 5 === 0
+          && loop_counter !== 0){
+            output.push('<br>');
+        }
+        output.push('<input class="buttons color10" disabled id='
+          + loop_counter
+          + ' onclick=button_click('
+          + loop_counter
+          + ') type=button value=->'
+        );
+    }
+    document.getElementById('game-area').innerHTML = output.join('');
+}
+
 function play_audio(i){
     if(document.getElementById('audio-volume').value > 0){
         document.getElementById(i).volume = document.getElementById('audio-volume').value;
@@ -139,7 +190,7 @@ function showhide(){
 
 function start(){
     // validate settings
-    j = [
+    var j = [
       'audio-volume',
       'max-time',
       'y-margin'
@@ -255,7 +306,6 @@ var button_values = [
   -1,-1,-1,-1,-1
 ];
 var interval = 0;
-var j = [''];
 var selected_button = [-1,-1];
 var tempinfo = [
   -1,-1,-1,-1,-1,
@@ -263,54 +313,6 @@ var tempinfo = [
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1
 ];
-
-// setup buttons in game-area
-for(var loop_counter = 0; loop_counter < 20; loop_counter++){
-    if(loop_counter % 5 === 0
-      && loop_counter !== 0){
-        j.push('<br>');
-    }
-    j.push('<input class="buttons color10" disabled id='
-      + loop_counter
-      + ' onclick=button_click('
-      + loop_counter
-      + ') type=button value=->'
-    );
-}
-document.getElementById('game-area').innerHTML = j.join('');
-j = 0;
-
-// setup settings, get values from localStorage if they are set
-document.getElementById('audio-volume').value =
-  window.localStorage.getItem('Match.htm-audio-volume') === null
-    ? 1
-    : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
-document.getElementById('display-select').value =
-  window.localStorage.getItem('Match.htm-display-select') === null
-    ? 1
-    : window.localStorage.getItem('Match.htm-display-select');
-document.getElementById('max-time').value =
-  window.localStorage.getItem('Match.htm-max-time') === null
-    ? 0
-    : parseInt(window.localStorage.getItem('Match.htm-max-time'));
-document.getElementById('y-margin').value =
-  window.localStorage.getItem('Match.htm-y-margin') === null
-    ? 0
-    : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
-
-// set value of start-key if saved into localStorage
-if(window.localStorage.getItem('Match.htm-start-key') === null){
-    document.getElementById('start-key').value = 'H';
-
-}else{
-    document.getElementById('start-key').value =
-      window.localStorage.getItem('Match.htm-start-key');
-    document.getElementById('start-button').value =
-      'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
-}
-
-// set y margin of table based on settings
-document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
 window.onkeydown = function(e){
     var key = window.event ? event : e;
@@ -324,3 +326,5 @@ window.onkeydown = function(e){
         stop();
     }
 };
+
+window.onload = init;
