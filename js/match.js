@@ -1,5 +1,5 @@
 function button_click(button_id){
-    // set button color and value
+    // Set button color and value.
     document.getElementById(button_id).classList.remove('color10');
     document.getElementById(button_id).classList.add('color' + button_values[button_id]);
 
@@ -10,8 +10,9 @@ function button_click(button_id){
     ][document.getElementById('display-select').value];
 
     var loop_counter = 19;
-    if(selected_button[0] === -1){// if this is first button of button pair
-        // reset other buttons that haven't been matched yet
+    // If this is first button of button pair.
+    if(selected_button[0] === -1){
+        // Reset other buttons that haven't been matched yet.
         do{
             if(button_values[loop_counter] > -1
               && loop_counter !== button_id){
@@ -21,27 +22,27 @@ function button_click(button_id){
             }
         }while(loop_counter--);
 
-        // store button information
+        // Store button information.
         selected_button = [
           button_values[button_id],
-          button_id
+          button_id,
         ];
 
-        // disable this button to prevent reclicks
+        // Disable this button to prevent reclicks.
         document.getElementById(button_id).disabled = 1;
 
     }else{
         document.getElementById('attempted-matches').innerHTML =
           parseInt(document.getElementById('attempted-matches').innerHTML) + 1;
 
-        // if value of this button matches the value of the previously selected button
+        // If value of this button matches the value of the previously selected button.
         if(selected_button[0] === button_values[button_id]){
-            // set button values to 0 to prevent them from being reset
+            // Set button values to 0 to prevent them from being reset.
             button_values[button_id] = -1;
             button_values[selected_button[1]] = -1;
         }
 
-        // check if there are any enabled buttons left
+        // Check if there are any enabled buttons left.
         var x = 1;
         do{
             document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
@@ -55,10 +56,10 @@ function button_click(button_id){
 
         selected_button = [
           -1,
-          -1
+          -1,
         ];
 
-        // if not, end game
+        // If not, end game.
         if(x){
             stop();
         }
@@ -66,7 +67,7 @@ function button_click(button_id){
 }
 
 function decisecond(){
-    // if max-time is set, decrease time by .1sec, else add .1sec
+    // If max-time is set, decrease time by .1sec, else add .1sec.
     document.getElementById('time').innerHTML = (
       parseFloat(document.getElementById('time').innerHTML)
       + (document.getElementById('max-time').value > 0
@@ -75,7 +76,7 @@ function decisecond(){
       )
     ).toFixed(1);
 
-    // if time can run out, check if game over
+    // If time can run out, check if game over.
     if(document.getElementById('max-time').value > 0
       && document.getElementById('time').innerHTML <= 0){
         stop();
@@ -83,7 +84,7 @@ function decisecond(){
 }
 
 function init(){
-    // setup settings, get values from localStorage if they are set
+    // Setup settings, get values from localStorage if they are set.
     document.getElementById('audio-volume').value =
       window.localStorage.getItem('Match.htm-audio-volume') === null
         ? 1
@@ -101,7 +102,7 @@ function init(){
         ? 0
         : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
 
-    // set value of start-key if saved into localStorage
+    // Set value of start-key if saved into window.localStorage.
     if(window.localStorage.getItem('Match.htm-start-key') === null){
         document.getElementById('start-key').value = 'H';
 
@@ -112,10 +113,10 @@ function init(){
           'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
     }
 
-    // set y margin of table based on settings
+    // Set Y margin of table based on settings.
     document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
-    // setup buttons in game-area
+    // Setup buttons in game-area.
     var output = [''];
 
     for(var loop_counter = 0; loop_counter < 20; loop_counter++){
@@ -134,27 +135,31 @@ function init(){
 }
 
 function play_audio(i){
-    if(document.getElementById('audio-volume').value > 0){
-        document.getElementById(i).volume = document.getElementById('audio-volume').value;
-        document.getElementById(i).currentTime = 0;
-        document.getElementById(i).play();
+    if(document.getElementById('audio-volume').value <= 0){
+        return;
     }
+
+    document.getElementById(i).volume = document.getElementById('audio-volume').value;
+    document.getElementById(i).currentTime = 0;
+    document.getElementById(i).play();
 }
 
 function reset(){
-    if(confirm('Reset settings?')){
-        document.getElementById('audio-volume').value = 1;
-        document.getElementById('display-select').value = 1;
-        document.getElementById('max-time').value = 0;
-        document.getElementById('start-key').value = 'H';
-        document.getElementById('y-margin').value = 0;
-
-        save();
+    if(!confirm('Reset settings?')){
+        return;
     }
+
+    document.getElementById('audio-volume').value = 1;
+    document.getElementById('display-select').value = 1;
+    document.getElementById('max-time').value = 0;
+    document.getElementById('start-key').value = 'H';
+    document.getElementById('y-margin').value = 0;
+
+    save();
 }
 
 function save(){
-    // save settings into localStorage if they differ from settings, else forget
+    // Save settings into localStorage if they differ from settings, else forget.
     var loop_counter = 4;
     do{
         var id = [
@@ -165,7 +170,7 @@ function save(){
           'start-key',
         ][loop_counter];
 
-        if(document.getElementById(id).value == [1, 0, 0, 1, 'H'][loop_counter]){
+        if(document.getElementById(id).value == [1, 0, 0, 1, 'H',][loop_counter]){
             window.localStorage.removeItem('Match.htm-' + id);
 
         }else{
@@ -189,11 +194,11 @@ function showhide(){
 }
 
 function start(){
-    // validate settings
+    // Validate settings
     var j = [
       'audio-volume',
       'max-time',
-      'y-margin'
+      'y-margin',
     ];
     var loop_counter = 2;
     do{
@@ -202,17 +207,17 @@ function start(){
             document.getElementById(j[loop_counter]).value = [
               1,
               0,
-              0
+              0,
             ][loop_counter];
         }
     }while(loop_counter--);
 
-    // set y margin of table based on settings
+    // Set y margin of table based on settings.
     document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     var temp = document.getElementById('attempted-matches').innerHTML = 0;
 
-    // generate hidden button pairs
+    // Generate hidden button pairs.
     loop_counter = 19;
     do{
         document.getElementById(loop_counter).disabled = 0;
@@ -238,12 +243,12 @@ function start(){
         stop();
     };
 
-    // disable settings to prevent editing
+    // Disable settings to prevent editing.
     document.getElementById('display-select').disabled = 1;
     document.getElementById('max-time').disabled = 1;
     document.getElementById('reset-button').disabled = 1;
 
-    // display time limit if it is greater than 0
+    // Display time limit if it is greater than 0.
     if(document.getElementById('max-time').value > 0){
         document.getElementById('time').innerHTML = document.getElementById('max-time').value;
         document.getElementById('time-max').innerHTML = document.getElementById('max-time').value;
@@ -269,31 +274,31 @@ function stop(){
         start();
     };
 
-    // disable all game-area buttons
+    // Disable all game-area buttons.
     var loop_counter = 19;
     do{
         document.getElementById(loop_counter).disabled = 1;
     }while(loop_counter--);
 
-    // blank out button values
+    // Blank out button values.
     tempinfo = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1
+      -1,-1,-1,-1,-1,
     ];
     button_values = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1
+      -1,-1,-1,-1,-1,
     ];
     selected_buttons = [
       -1,
-      -1
+      -1,
     ];
 
-    // enable settings to allow editing
+    // Enable settings to allow editing.
     document.getElementById('display-select').disabled = 0;
     document.getElementById('max-time').disabled = 0;
     document.getElementById('reset-button').disabled = 0;
@@ -303,15 +308,15 @@ var button_values = [
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1,
-  -1,-1,-1,-1,-1
+  -1,-1,-1,-1,-1,
 ];
 var interval = 0;
-var selected_button = [-1,-1];
+var selected_button = [-1, -1,];
 var tempinfo = [
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1,
   -1,-1,-1,-1,-1,
-  -1,-1,-1,-1,-1
+  -1,-1,-1,-1,-1,
 ];
 
 window.onkeydown = function(e){
@@ -322,7 +327,8 @@ window.onkeydown = function(e){
         stop();
         start();
 
-    }else if(key === 27){// ESC
+    // ESC: stop current game.
+    }else if(key === 27){
         stop();
     }
 };
