@@ -114,7 +114,7 @@ function init(){
     }
 
     // Set Y margin of table based on settings.
-    document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
+    document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     // Setup buttons in game-area.
     var output = [''];
@@ -164,13 +164,13 @@ function save(){
     do{
         var id = [
           'audio-volume',
-          'max-time',
-          'y-margin',
           'display-select',
+          'max-time',
           'start-key',
+          'y-margin',
         ][loop_counter];
 
-        if(document.getElementById(id).value == [1, 0, 0, 1, 'H',][loop_counter]){
+        if(document.getElementById(id).value == [1, 1, 0, 'H', 0,][loop_counter]){
             window.localStorage.removeItem('Match.htm-' + id);
 
         }else{
@@ -195,16 +195,17 @@ function showhide(){
 
 function start(){
     // Validate settings
-    var j = [
-      'audio-volume',
-      'max-time',
-      'y-margin',
-    ];
     var loop_counter = 2;
     do{
-        if(isNaN(document.getElementById(j[loop_counter]).value)
-          || document.getElementById(j[loop_counter]).value < 0){
-            document.getElementById(j[loop_counter]).value = [
+        var id = [
+          'audio-volume',
+          'max-time',
+          'y-margin',
+        ][loop_counter];
+
+        if(isNaN(document.getElementById(id).value)
+          || document.getElementById(id).value < 0){
+            document.getElementById(id).value = [
               1,
               0,
               0,
@@ -213,7 +214,7 @@ function start(){
     }while(loop_counter--);
 
     // Set y margin of table based on settings.
-    document.getElementById('lol-a-table').style.marginTop = document.getElementById('y-margin').value + 'px';
+    document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     var temp = document.getElementById('attempted-matches').innerHTML = 0;
 
