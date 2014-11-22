@@ -321,8 +321,7 @@ var tempinfo = [
 ];
 
 window.onkeydown = function(e){
-    var key = window.event ? event : e;
-    key = key.charCode ? key.charCode : key.keyCode;
+    var key = e.keyCode || e.which;
 
     if(String.fromCharCode(key) === document.getElementById('start-key').value){
         stop();
