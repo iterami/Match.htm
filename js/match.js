@@ -83,57 +83,6 @@ function decisecond(){
     }
 }
 
-function init(){
-    // Setup settings, get values from localStorage if they are set.
-    document.getElementById('audio-volume').value =
-      window.localStorage.getItem('Match.htm-audio-volume') === null
-        ? 1
-        : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
-    document.getElementById('display-select').value =
-      window.localStorage.getItem('Match.htm-display-select') === null
-        ? 1
-        : window.localStorage.getItem('Match.htm-display-select');
-    document.getElementById('max-time').value =
-      window.localStorage.getItem('Match.htm-max-time') === null
-        ? 0
-        : parseInt(window.localStorage.getItem('Match.htm-max-time'));
-    document.getElementById('y-margin').value =
-      window.localStorage.getItem('Match.htm-y-margin') === null
-        ? 0
-        : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
-
-    // Set value of start-key if saved into window.localStorage.
-    if(window.localStorage.getItem('Match.htm-start-key') === null){
-        document.getElementById('start-key').value = 'H';
-
-    }else{
-        document.getElementById('start-key').value =
-          window.localStorage.getItem('Match.htm-start-key');
-        document.getElementById('start-button').value =
-          'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
-    }
-
-    // Set Y margin of table based on settings.
-    document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
-
-    // Setup buttons in game-area.
-    var output = [''];
-
-    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % 5 === 0
-          && loop_counter !== 0){
-            output.push('<br>');
-        }
-        output.push('<input class="buttons color10" disabled id='
-          + loop_counter
-          + ' onclick=button_click('
-          + loop_counter
-          + ') type=button value=->'
-        );
-    }
-    document.getElementById('game-area').innerHTML = output.join('');
-}
-
 function play_audio(i){
     if(document.getElementById('audio-volume').value <= 0){
         return;
@@ -333,4 +282,53 @@ window.onkeydown = function(e){
     }
 };
 
-window.onload = init;
+window.onload = function(){
+    // Setup settings, get values from localStorage if they are set.
+    document.getElementById('audio-volume').value =
+      window.localStorage.getItem('Match.htm-audio-volume') === null
+        ? 1
+        : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
+    document.getElementById('display-select').value =
+      window.localStorage.getItem('Match.htm-display-select') === null
+        ? 1
+        : window.localStorage.getItem('Match.htm-display-select');
+    document.getElementById('max-time').value =
+      window.localStorage.getItem('Match.htm-max-time') === null
+        ? 0
+        : parseInt(window.localStorage.getItem('Match.htm-max-time'));
+    document.getElementById('y-margin').value =
+      window.localStorage.getItem('Match.htm-y-margin') === null
+        ? 0
+        : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
+
+    // Set value of start-key if saved into window.localStorage.
+    if(window.localStorage.getItem('Match.htm-start-key') === null){
+        document.getElementById('start-key').value = 'H';
+
+    }else{
+        document.getElementById('start-key').value =
+          window.localStorage.getItem('Match.htm-start-key');
+        document.getElementById('start-button').value =
+          'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
+    }
+
+    // Set Y margin of table based on settings.
+    document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
+
+    // Setup buttons in game-area.
+    var output = [''];
+
+    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
+        if(loop_counter % 5 === 0
+          && loop_counter !== 0){
+            output.push('<br>');
+        }
+        output.push('<input class="buttons color10" disabled id='
+          + loop_counter
+          + ' onclick=button_click('
+          + loop_counter
+          + ') type=button value=->'
+        );
+    }
+    document.getElementById('game-area').innerHTML = output.join('');
+};
