@@ -209,7 +209,7 @@ function start(){
         document.getElementById('if-time-limit').style.display = 'none';
     }
 
-    interval = setInterval(
+    interval = window.setInterval(
       'decisecond()',
       100
     );
@@ -217,7 +217,7 @@ function start(){
 }
 
 function stop(){
-    clearInterval(interval);
+    window.clearInterval(interval);
 
     document.getElementById('start-button').value = 'Start [' + document.getElementById('start-key').value + ']';
     document.getElementById('start-button').onclick = function(){
