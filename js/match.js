@@ -31,38 +31,39 @@ function button_click(button_id){
         // Disable this button to prevent reclicks.
         document.getElementById(button_id).disabled = 1;
 
-    }else{
-        document.getElementById('attempted-matches').innerHTML =
-          parseInt(document.getElementById('attempted-matches').innerHTML) + 1;
+        return;
+    }
 
-        // If value of this button matches the value of the previously selected button.
-        if(selected_button[0] === button_values[button_id]){
-            // Set button values to 0 to prevent them from being reset.
-            button_values[button_id] = -1;
-            button_values[selected_button[1]] = -1;
+    document.getElementById('attempted-matches').innerHTML =
+      parseInt(document.getElementById('attempted-matches').innerHTML) + 1;
+
+    // If value of this button matches the value of the previously selected button.
+    if(selected_button[0] === button_values[button_id]){
+        // Set button values to 0 to prevent them from being reset.
+        button_values[button_id] = -1;
+        button_values[selected_button[1]] = -1;
+    }
+
+    // Check if there are any enabled buttons left.
+    var x = 1;
+    do{
+        document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
+          ? 1
+          : 0;
+
+        if(!document.getElementById(loop_counter).disabled){
+            x = 0;
         }
+    }while(loop_counter--);
 
-        // Check if there are any enabled buttons left.
-        var x = 1;
-        do{
-            document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
-              ? 1
-              : 0;
+    selected_button = [
+      -1,
+      -1,
+    ];
 
-            if(!document.getElementById(loop_counter).disabled){
-                x = 0;
-            }
-        }while(loop_counter--);
-
-        selected_button = [
-          -1,
-          -1,
-        ];
-
-        // If not, end game.
-        if(x){
-            stop();
-        }
+    // If not, end game.
+    if(x){
+        stop();
     }
 }
 
