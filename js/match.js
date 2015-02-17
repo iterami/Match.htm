@@ -132,14 +132,14 @@ function save(){
     }while(loop_counter--);
 }
 
-function showhide(){
-    if(document.getElementById('showhide-button').value === '-'){
+function settings_toggle(){
+    if(document.getElementById('settings-button').value === '-'){
         document.getElementById('settings-span').style.display = 'none';
-        document.getElementById('showhide-button').value = '+';
+        document.getElementById('settings-button').value = '+';
 
     }else{
         document.getElementById('settings-span').style.display = 'inline';
-        document.getElementById('showhide-button').value = '-';
+        document.getElementById('settings-button').value = '-';
     }
 }
 
