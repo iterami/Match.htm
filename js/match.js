@@ -29,7 +29,7 @@ function button_click(button_id){
         ];
 
         // Disable this button to prevent reclicks.
-        document.getElementById(button_id).disabled = 1;
+        document.getElementById(button_id).disabled = true;
 
         return;
     }
@@ -39,20 +39,20 @@ function button_click(button_id){
 
     // If value of this button matches the value of the previously selected button.
     if(selected_button[0] === button_values[button_id]){
-        // Set button values to 0 to prevent them from being reset.
+        // Set button values to -1 to prevent them from being reset.
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
     }
 
     // Check if there are any enabled buttons left.
-    var x = 1;
+    var buttons_remain = false;
     do{
         document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
-          ? 1
-          : 0;
+          ? true
+          : false;
 
         if(!document.getElementById(loop_counter).disabled){
-            x = 0;
+            buttons_remain = true;
         }
     }while(loop_counter--);
 
@@ -62,7 +62,7 @@ function button_click(button_id){
     ];
 
     // If not, end game.
-    if(x){
+    if(!buttons_remain){
         stop();
     }
 }
@@ -108,19 +108,17 @@ function reset(){
     save();
 }
 
+// Save settings into window.localStorage if they differ from default.
 function save(){
-    // Save settings into localStorage if they differ from settings, else forget.
-    var loop_counter = 4;
-    do{
-        var id = [
-          'audio-volume',
-          'display-select',
-          'max-time',
-          'start-key',
-          'y-margin',
-        ][loop_counter];
-
-        if(document.getElementById(id).value == [1, 1, 0, 'H', 0,][loop_counter]){
+    var ids = {
+      'audio-volume': 1,
+      'display-select': 1,
+      'max-time': 0,
+      'start-key': 'H',
+      'y-margin': 0,
+    };
+    for(var id in ids){
+        if(document.getElementById(id).value == ids[id]){
             window.localStorage.removeItem('Match.htm-' + id);
 
         }else{
@@ -129,7 +127,7 @@ function save(){
               document.getElementById(id).value
             );
         }
-    }while(loop_counter--);
+    }
 }
 
 function settings_toggle(){
@@ -144,34 +142,35 @@ function settings_toggle(){
 }
 
 function start(){
-    // Validate settings
-    var loop_counter = 2;
-    do{
-        var id = [
-          'audio-volume',
-          'max-time',
-          'y-margin',
-        ][loop_counter];
+    document.getElementById('attempted-matches').innerHTML = 0;
 
+    // Validate settings.
+    var ids = {
+      'audio-volume': 1,
+      'max-time': 0,
+      'y-margin': 0,
+    };
+    for(var id in ids){
         if(isNaN(document.getElementById(id).value)
           || document.getElementById(id).value < 0){
-            document.getElementById(id).value = [
-              1,
-              0,
-              0,
-            ][loop_counter];
+            document.getElementById(id).value = ids[id];
         }
-    }while(loop_counter--);
+    }
 
-    // Set y margin of table based on settings.
+    // Set margin-top of table based on y-margin.
     document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
-    var temp = document.getElementById('attempted-matches').innerHTML = 0;
-
-    // Generate hidden button pairs.
+    // Generate button pairs.
     loop_counter = 19;
+    var tempinfo = [
+      -1,-1,-1,-1,-1,
+      -1,-1,-1,-1,-1,
+      -1,-1,-1,-1,-1,
+      -1,-1,-1,-1,-1,
+    ];
+    var temp = 0;
     do{
-        document.getElementById(loop_counter).disabled = 0;
+        document.getElementById(loop_counter).disabled = false;
 
         j = 9;
         do{
@@ -195,9 +194,9 @@ function start(){
     };
 
     // Disable settings to prevent editing.
-    document.getElementById('display-select').disabled = 1;
-    document.getElementById('max-time').disabled = 1;
-    document.getElementById('reset-button').disabled = 1;
+    document.getElementById('display-select').disabled = true;
+    document.getElementById('max-time').disabled = true;
+    document.getElementById('reset-button').disabled = true;
 
     // Display time limit if it is greater than 0.
     if(document.getElementById('max-time').value > 0){
@@ -228,31 +227,25 @@ function stop(){
     // Disable all game-area buttons.
     var loop_counter = 19;
     do{
-        document.getElementById(loop_counter).disabled = 1;
+        document.getElementById(loop_counter).disabled = true;
     }while(loop_counter--);
 
     // Blank out button values.
-    tempinfo = [
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-    ];
     button_values = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
     ];
-    selected_buttons = [
+    selected_button = [
       -1,
       -1,
     ];
 
     // Enable settings to allow editing.
-    document.getElementById('display-select').disabled = 0;
-    document.getElementById('max-time').disabled = 0;
-    document.getElementById('reset-button').disabled = 0;
+    document.getElementById('display-select').disabled = false;
+    document.getElementById('max-time').disabled = false;
+    document.getElementById('reset-button').disabled = false;
 }
 
 var button_values = [
@@ -263,12 +256,6 @@ var button_values = [
 ];
 var interval = 0;
 var selected_button = [-1, -1,];
-var tempinfo = [
-  -1,-1,-1,-1,-1,
-  -1,-1,-1,-1,-1,
-  -1,-1,-1,-1,-1,
-  -1,-1,-1,-1,-1,
-];
 
 window.onkeydown = function(e){
     var key = e.keyCode || e.which;
@@ -284,7 +271,7 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    // Setup settings, get values from localStorage if they are set.
+    // Fetch settings from window.localStorage and update settings inputs.
     document.getElementById('audio-volume').value =
       window.localStorage.getItem('Match.htm-audio-volume') === null
         ? 1
@@ -313,7 +300,7 @@ window.onload = function(){
           'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
     }
 
-    // Set Y margin of table based on settings.
+    // Set margin-top of table based on y-margin.
     document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     // Setup buttons in game-area.
