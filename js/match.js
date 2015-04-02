@@ -273,21 +273,13 @@ window.onkeydown = function(e){
 window.onload = function(){
     // Fetch settings from window.localStorage and update settings inputs.
     document.getElementById('audio-volume').value =
-      window.localStorage.getItem('Match.htm-audio-volume') === null
-        ? 1
-        : parseFloat(window.localStorage.getItem('Match.htm-audio-volume'));
+      parseFloat(window.localStorage.getItem('Match.htm-audio-volume')) || 1,
     document.getElementById('display-select').value =
-      window.localStorage.getItem('Match.htm-display-select') === null
-        ? 1
-        : window.localStorage.getItem('Match.htm-display-select');
+      window.localStorage.getItem('Match.htm-display-select') || 1;
     document.getElementById('max-time').value =
-      window.localStorage.getItem('Match.htm-max-time') === null
-        ? 0
-        : parseInt(window.localStorage.getItem('Match.htm-max-time'));
+      parseInt(window.localStorage.getItem('Match.htm-max-time')) || 0;
     document.getElementById('y-margin').value =
-      window.localStorage.getItem('Match.htm-y-margin') === null
-        ? 0
-        : parseInt(window.localStorage.getItem('Match.htm-y-margin'));
+      parseInt(window.localStorage.getItem('Match.htm-y-margin')) || 0;
 
     // Set value of start-key if saved into window.localStorage.
     if(window.localStorage.getItem('Match.htm-start-key') === null){
