@@ -47,9 +47,7 @@ function button_click(button_id){
     // Check if there are any enabled buttons left.
     var buttons_remain = false;
     do{
-        document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0
-          ? true
-          : false;
+        document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0;
 
         if(!document.getElementById(loop_counter).disabled){
             buttons_remain = true;
@@ -176,10 +174,10 @@ function start(){
     do{
         document.getElementById(loop_counter).disabled = false;
 
-        j = 9;
+        var pairs_counter = 9;
         do{
-            document.getElementById(loop_counter).classList.remove('color' + j);
-        }while(j--);
+            document.getElementById(loop_counter).classList.remove('color' + pairs_counter);
+        }while(pairs_counter--);
 
         document.getElementById(loop_counter).classList.add('color10');
         document.getElementById(loop_counter).value = '-';
