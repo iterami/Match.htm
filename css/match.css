@@ -46,6 +46,13 @@ input{
 .color10{
     background: #000;
 }
+#game-area{
+    min-width: 375px;
+}
+#if-time-limit,
+#settings-span{
+    display: none;
+}
 input{
     width: 75px;
 }
@@ -57,8 +64,8 @@ input[type=range],
 select:not([disabled]){
     cursor: pointer;
 }
-#settings-span{
-    display: none;
+.left{
+    width: 50%;
 }
 .settings-td{
     padding: 9px;
