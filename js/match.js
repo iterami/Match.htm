@@ -1,3 +1,5 @@
+'use strict';
+
 function button_click(button_id){
     // Set button color and value.
     document.getElementById(button_id).classList.remove('color10');
@@ -163,7 +165,7 @@ function start(){
     document.getElementById('table').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     // Generate button pairs.
-    loop_counter = 19;
+    var loop_counter = 19;
     var tempinfo = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
