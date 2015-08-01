@@ -197,11 +197,6 @@ function start(){
         stop();
     };
 
-    // Disable settings to prevent editing.
-    document.getElementById('display-select').disabled = true;
-    document.getElementById('max-time').disabled = true;
-    document.getElementById('reset-button').disabled = true;
-
     // Display time limit if it is greater than 0.
     if(document.getElementById('max-time').value > 0){
         document.getElementById('time').innerHTML = document.getElementById('max-time').value;
@@ -245,11 +240,6 @@ function stop(){
       -1,
       -1,
     ];
-
-    // Enable settings to allow editing.
-    document.getElementById('display-select').disabled = false;
-    document.getElementById('max-time').disabled = false;
-    document.getElementById('reset-button').disabled = false;
 }
 
 var button_values = [
