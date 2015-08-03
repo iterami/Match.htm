@@ -193,9 +193,7 @@ function start(){
     }while(loop_counter--);
 
     document.getElementById('start-button').value = 'End [ESC]';
-    document.getElementById('start-button').onclick = function(){
-        stop();
-    };
+    document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
     if(document.getElementById('max-time').value > 0){
@@ -219,9 +217,7 @@ function stop(){
     window.clearInterval(interval);
 
     document.getElementById('start-button').value = 'Start [' + document.getElementById('start-key').value + ']';
-    document.getElementById('start-button').onclick = function(){
-        start();
-    };
+    document.getElementById('start-button').onclick = start;
 
     // Disable all game-area buttons.
     var loop_counter = 19;
