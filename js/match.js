@@ -274,10 +274,14 @@ window.onload = function(){
       parseFloat(window.localStorage.getItem('Match.htm-audio-volume')) || 1,
     document.getElementById('display-select').value =
       window.localStorage.getItem('Match.htm-display-select') || 1;
-    document.getElementById('max-time').value =
-      parseInt(window.localStorage.getItem('Match.htm-max-time')) || 0;
-    document.getElementById('y-margin').value =
-      parseInt(window.localStorage.getItem('Match.htm-y-margin')) || 0;
+    var ids = {
+      'max-time': 0,
+      'y-margin': 0,
+    };
+    for(var id in ids){
+        document.getElementById(id).value =
+          parseInt(window.localStorage.getItem('Match.htm-' + id)) || ids[id];
+    }
 
     // Set value of start-key if saved into window.localStorage.
     if(window.localStorage.getItem('Match.htm-start-key') === null){
