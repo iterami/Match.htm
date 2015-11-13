@@ -3,29 +3,22 @@
 <title>Match.htm</title>
 <link href=css/match.css rel=stylesheet>
 
-<table id=table>
-    <tr>
-        <td class=left rowspan=2>
-        <td id=game-area>
-        <td class=settings-td rowspan=2>
-            <span id=settings-span>
-                <input id=audio-volume max=1 min=0 step=.01 type=range value=1>Audio<br>
-                <select id=display-select>
-                  <option value=0>Letters</option>
-                  <option selected value=1>Numbers</option>
-                  <option value=2>Symbols</option>
-                </select>Display<br>
-                <input id=max-time value=0>Max Time<br>
-                <input id=start-key maxlength=1 value=H>Start<br>
-                <input id=y-margin value=0>Y Margin<br>
-                <input id=reset-button onclick=reset() type=button value=Reset>
-            </span>
-    <tr>
-        <td>
-            Attempted Matches: <b id=attempted-matches>0</b><br>
-            Time: <b id=time>0</b><span id=if-time-limit> out of <b id=time-max>0</b></span><br>
-            <input id=start-button onclick=start() type=button value="Start [H]">
-            <input id=settings-button onclick=settings_toggle() type=button value=+>
-</table>
+<div id=game-area></div>
+Attempted Matches: <b id=attempted-matches>0</b><br>
+Time: <b id=time>0</b><span id=if-time-limit> out of <b id=time-max>0</b></span><br>
+<input id=start-button onclick=start() type=button value="Start [H]">
+<input id=settings-button onclick=settings_toggle() type=button value=+>
+<div id=settings>
+    <input id=audio-volume max=1 min=0 step=.01 type=range value=1>Audio<br>
+    <select id=display-select>
+      <option value=0>Letters</option>
+      <option selected value=1>Numbers</option>
+      <option value=2>Symbols</option>
+    </select>Display<br>
+    <input id=max-time value=0>Max Time<br>
+    <input id=start-key maxlength=1 value=H>Start<br>
+    <input id=y-margin value=0>Y Margin<br>
+    <input id=reset-button onclick=reset() type=button value=Reset>
+</div>
 
 <script src=js/match.js></script>
