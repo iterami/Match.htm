@@ -49,9 +49,10 @@ function button_click(button_id){
     // Check if there are any enabled buttons left.
     var buttons_remain = false;
     do{
-        document.getElementById(loop_counter).disabled = button_values[loop_counter] < 0;
+        var disabled = button_values[loop_counter] < 0;
+        document.getElementById(loop_counter).disabled = disabled;
 
-        if(!document.getElementById(loop_counter).disabled){
+        if(!disabled){
             buttons_remain = true;
         }
     }while(loop_counter--);
@@ -69,16 +70,17 @@ function button_click(button_id){
 
 function decisecond(){
     // If max-time is set, decrease time by .1sec, else add .1sec.
+    var max_time = document.getElementById('max-time').innerHTML;
     document.getElementById('time').innerHTML = (
       parseFloat(document.getElementById('time').innerHTML)
-      + (document.getElementById('max-time').value > 0
+      + (max_time > 0
         ? -.1
         : .1
       )
     ).toFixed(1);
 
     // If time can run out, check if game over.
-    if(document.getElementById('max-time').value > 0
+    if(max_time > 0
       && document.getElementById('time').innerHTML <= 0){
         stop();
     }
@@ -99,11 +101,16 @@ function reset(){
         return;
     }
 
-    document.getElementById('audio-volume').value = 1;
-    document.getElementById('display-select').value = 1;
-    document.getElementById('max-time').value = 0;
-    document.getElementById('start-key').value = 'H';
-    document.getElementById('y-margin').value = 0;
+    var ids = {
+      'audio-volume': 1,
+      'display-select': 1,
+      'max-time': 0,
+      'start-key': 'H',
+      'y-margin': 0,
+    };
+    for(var id in ids){
+        document.getElementById(id).value = ids[id];
+    }
 
     save();
 }
@@ -118,13 +125,14 @@ function save(){
       'y-margin': 0,
     };
     for(var id in ids){
-        if(document.getElementById(id).value == ids[id]){
+        var value = document.getElementById(id).value;
+        if(value == ids[id]){
             window.localStorage.removeItem('Match.htm-' + id);
 
         }else{
             window.localStorage.setItem(
               'Match.htm-' + id,
-              document.getElementById(id).value
+              value
             );
         }
     }
@@ -155,8 +163,9 @@ function start(){
       'y-margin': 0,
     };
     for(var id in ids){
-        if(isNaN(document.getElementById(id).value)
-          || document.getElementById(id).value < 0){
+        var value = document.getElementById(id).value;
+        if(isNaN(value)
+          || value < 0){
             document.getElementById(id).value = ids[id];
         }
     }
@@ -196,9 +205,10 @@ function start(){
     document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
-    if(document.getElementById('max-time').value > 0){
-        document.getElementById('time').innerHTML = document.getElementById('max-time').value;
-        document.getElementById('time-max').innerHTML = document.getElementById('max-time').value;
+    var max_time = document.getElementById('max-time').value;
+    if(max_time > 0){
+        document.getElementById('time').innerHTML = max_time;
+        document.getElementById('time-max').innerHTML = max_time;
         document.getElementById('if-time-limit').style.display = 'inline';
 
     }else{
@@ -284,14 +294,13 @@ window.onload = function(){
     }
 
     // Set value of start-key if saved into window.localStorage.
-    if(window.localStorage.getItem('Match.htm-start-key') === null){
+    var start_key = window.localStorage.getItem('Match.htm-start-key');
+    if(start_key === null){
         document.getElementById('start-key').value = 'H';
 
     }else{
-        document.getElementById('start-key').value =
-          window.localStorage.getItem('Match.htm-start-key');
-        document.getElementById('start-button').value =
-          'Start [' + window.localStorage.getItem('Match.htm-start-key') + ']';
+        document.getElementById('start-key').value = start_key;
+        document.getElementById('start-button').value = 'Start [' + start_key + ']';
     }
 
     // Set margin-top of game-area based on y-margin.
