@@ -70,7 +70,6 @@ function button_click(button_id){
 
 function decisecond(){
     // If max-time is set, decrease time by .1sec, else add .1sec.
-    var max_time = document.getElementById('max-time').innerHTML;
     document.getElementById('time').innerHTML = (
       parseFloat(document.getElementById('time').innerHTML)
       + (max_time > 0
@@ -205,7 +204,7 @@ function start(){
     document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
-    var max_time = document.getElementById('max-time').value;
+    max_time = parseFloat(document.getElementById('max-time').value);
     if(max_time > 0){
         document.getElementById('time').innerHTML = max_time;
         document.getElementById('time-max').innerHTML = max_time;
@@ -255,6 +254,7 @@ var button_values = [
   -1,-1,-1,-1,-1,
 ];
 var interval = 0;
+var max_time = 0;
 var selected_button = [-1, -1,];
 
 window.onkeydown = function(e){
