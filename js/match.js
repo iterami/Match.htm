@@ -70,17 +70,15 @@ function button_click(button_id){
 
 function decisecond(){
     // If max-time is set, decrease time by .1sec, else add .1sec.
-    document.getElementById('time').innerHTML = (
-      parseFloat(document.getElementById('time').innerHTML)
-      + (max_time > 0
-        ? -.1
-        : .1
-      )
-    ).toFixed(1);
+    time = max_time > 0
+      ? (parseFloat(time) - .1).toFixed(1)
+      : (parseFloat(time) + .1).toFixed(1);
+
+    document.getElementById('time').innerHTML = time;
 
     // If time can run out, check if game over.
     if(max_time > 0
-      && document.getElementById('time').innerHTML <= 0){
+      && time <= 0){
         stop();
     }
 }
@@ -206,14 +204,16 @@ function start(){
     // Display time limit if it is greater than 0.
     max_time = parseFloat(document.getElementById('max-time').value);
     if(max_time > 0){
-        document.getElementById('time').innerHTML = max_time;
-        document.getElementById('time-max').innerHTML = max_time;
         document.getElementById('if-time-limit').style.display = 'inline';
+        document.getElementById('time-max').innerHTML = max_time;
+        time = max_time;
 
     }else{
-        document.getElementById('time').innerHTML = 0;
         document.getElementById('if-time-limit').style.display = 'none';
+        time = 0;
     }
+
+    document.getElementById('time').innerHTML = time;
 
     interval = window.setInterval(
       'decisecond()',
@@ -256,6 +256,7 @@ var button_values = [
 var interval = 0;
 var max_time = 0;
 var selected_button = [-1, -1,];
+var time = 0;
 
 window.onkeydown = function(e){
     var key = e.keyCode || e.which;
