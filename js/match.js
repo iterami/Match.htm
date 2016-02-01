@@ -216,7 +216,7 @@ function start(){
     document.getElementById('time').innerHTML = time;
 
     interval = window.setInterval(
-      'decisecond()',
+      decisecond,
       100
     );
     save();
