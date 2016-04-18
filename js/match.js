@@ -83,16 +83,6 @@ function decisecond(){
     }
 }
 
-function play_audio(id){
-    if(document.getElementById('audio-volume').value <= 0){
-        return;
-    }
-
-    document.getElementById(id).volume = document.getElementById('audio-volume').value;
-    document.getElementById(id).currentTime = 0;
-    document.getElementById(id).play();
-}
-
 function reset(){
     if(!window.confirm('Reset settings?')){
         return;
