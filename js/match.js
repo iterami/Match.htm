@@ -36,8 +36,10 @@ function button_click(button_id){
         return;
     }
 
-    document.getElementById('attempted-matches').innerHTML =
-      parseInt(document.getElementById('attempted-matches').innerHTML) + 1;
+    document.getElementById('attempted-matches').innerHTML = parseInt(
+      document.getElementById('attempted-matches').innerHTML,
+      10
+    ) + 1;
 
     // If value of this button matches the value of the previously selected button.
     if(selected_button[0] === button_values[button_id]){
@@ -280,8 +282,10 @@ window.onload = function(){
       'y-margin': 0,
     };
     for(var id in ids){
-        document.getElementById(id).value =
-          parseInt(window.localStorage.getItem('Match.htm-' + id)) || ids[id];
+        document.getElementById(id).value = parseInt(
+          window.localStorage.getItem('Match.htm-' + id),
+          10
+        ) || ids[id];
     }
 
     // Set value of start-key if saved into window.localStorage.
