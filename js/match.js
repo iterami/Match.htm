@@ -9,7 +9,7 @@ function button_click(button_id){
       'ABCDEFGHIJ'[button_values[button_id]],
       button_values[button_id],
       '~!@#$%^&*('[button_values[button_id]]
-    ][document.getElementById('display-select').value];
+    ][settings['display']];
 
     var loop_counter = 19;
     // If this is first button of button pair.
@@ -85,48 +85,6 @@ function decisecond(){
     }
 }
 
-function reset(){
-    if(!window.confirm('Reset settings?')){
-        return;
-    }
-
-    var ids = {
-      'audio-volume': 1,
-      'display-select': 1,
-      'max-time': 0,
-      'start-key': 'H',
-      'y-margin': 0,
-    };
-    for(var id in ids){
-        document.getElementById(id).value = ids[id];
-    }
-
-    save();
-}
-
-// Save settings into window.localStorage if they differ from default.
-function save(){
-    var ids = {
-      'audio-volume': 1,
-      'display-select': 1,
-      'max-time': 0,
-      'start-key': 'H',
-      'y-margin': 0,
-    };
-    for(var id in ids){
-        var value = document.getElementById(id).value;
-        if(value == ids[id]){
-            window.localStorage.removeItem('Match.htm-' + id);
-
-        }else{
-            window.localStorage.setItem(
-              'Match.htm-' + id,
-              value
-            );
-        }
-    }
-}
-
 function settings_toggle(state){
     state = state == void 0
       ? document.getElementById('settings-button').value === '+'
@@ -145,22 +103,8 @@ function settings_toggle(state){
 function start(){
     document.getElementById('attempted-matches').innerHTML = 0;
 
-    // Validate settings.
-    var ids = {
-      'audio-volume': 1,
-      'max-time': 0,
-      'y-margin': 0,
-    };
-    for(var id in ids){
-        var value = document.getElementById(id).value;
-        if(isNaN(value)
-          || value < 0){
-            document.getElementById(id).value = ids[id];
-        }
-    }
-
     // Set margin-top of game-area based on y-margin.
-    document.getElementById('game-area').style.marginTop = document.getElementById('y-margin').value + 'px';
+    document.getElementById('game-area').style.marginTop = settings['y-margin'] + 'px';
 
     // Generate button pairs.
     var loop_counter = 19;
@@ -194,11 +138,10 @@ function start(){
     document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
-    max_time = parseFloat(document.getElementById('max-time').value);
     if(max_time > 0){
         document.getElementById('if-time-limit').style.display = 'inline';
-        document.getElementById('time-max').innerHTML = max_time;
-        time = max_time;
+        document.getElementById('time-max').innerHTML = settings['max-time'];
+        time = settings['max-time'];
 
     }else{
         document.getElementById('if-time-limit').style.display = 'none';
@@ -217,7 +160,7 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start [' + document.getElementById('start-key').value + ']';
+    document.getElementById('start-button').value = 'Start [' + settings['start-key'] + ']';
     document.getElementById('start-button').onclick = start;
 
     // Disable all game-area buttons.
@@ -253,7 +196,7 @@ var time = 0;
 window.onkeydown = function(e){
     var key = e.keyCode || e.which;
 
-    if(String.fromCharCode(key) === document.getElementById('start-key').value){
+    if(String.fromCharCode(key) === settings['start-key']){
         stop();
         start();
 
@@ -272,31 +215,25 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    // Fetch settings from window.localStorage and update settings inputs.
-    document.getElementById('audio-volume').value =
-      parseFloat(window.localStorage.getItem('Match.htm-audio-volume')) || 1,
-    document.getElementById('display-select').value =
-      window.localStorage.getItem('Match.htm-display-select') || 1;
-    var ids = {
-      'max-time': 0,
-      'y-margin': 0,
-    };
-    for(var id in ids){
-        document.getElementById(id).value = parseInt(
-          window.localStorage.getItem('Match.htm-' + id),
-          10
-        ) || ids[id];
-    }
+    init_settings(
+      'Match.htm-',
+      {
+        'audio-volume': 1,
+        'display': 1,
+        'max-time': 0,
+        'start-key': 'H',
+        'y-margin': 0,
+      }
+    );
 
-    // Set value of start-key if saved into window.localStorage.
-    var start_key = window.localStorage.getItem('Match.htm-start-key');
-    if(start_key === null){
-        document.getElementById('start-key').value = 'H';
-
-    }else{
-        document.getElementById('start-key').value = start_key;
-        document.getElementById('start-button').value = 'Start [' + start_key + ']';
-    }
+    document.getElementById('settings').innerHTML =
+      '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range value=' + settings['audio-volume'] + '><td>Audio'
+        + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
+        + '<tr><td><input id=max-time value=' + settings['max-time'] + '><td>Max Time'
+        + '<tr><td><input id=start-key maxlength=1 value=' + settings['start-key'] + '><td>Start'
+        + '<tr><td><input id=y-margin value=' + settings['y-margin'] + '><td>Y Margin'
+        + '<tr><td colspan=2><input id=reset-button onclick=reset() type=button value=Reset>';
+    document.getElementById('display').value = settings['display'];
 
     // Set margin-top of game-area based on y-margin.
     document.getElementById('game-area').style.marginTop = document.getElementById('y-margin').value + 'px';
@@ -315,4 +252,6 @@ window.onload = function(){
           + ') type=button value=->';
     }
     document.getElementById('game-area').innerHTML = output;
+
+    stop();
 };
