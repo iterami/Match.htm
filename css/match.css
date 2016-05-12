@@ -5,9 +5,12 @@ body{
     text-align: center;
 }
 .buttons{
+    border-width: 0;
     color: #000;
     font-size: 200%;
     height: 75px;
+    margin: 1px;
+    outline-width: 0;
     width: 75px !important;
 }
 .color0{
@@ -41,7 +44,7 @@ body{
     background: #70550f;
 }
 .color10{
-    background: #000;
+    background: #2a2a2a;
 }
 #game-area{
     min-width: 375px;
