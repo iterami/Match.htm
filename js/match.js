@@ -227,13 +227,13 @@ window.onload = function(){
     );
 
     document.getElementById('settings').innerHTML =
-      '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range value=' + settings['audio-volume'] + '><td>Audio'
+      '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
         + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
-        + '<tr><td><input id=max-time value=' + settings['max-time'] + '><td>Max Time'
-        + '<tr><td><input id=start-key maxlength=1 value=' + settings['start-key'] + '><td>Start'
-        + '<tr><td><input id=y-margin value=' + settings['y-margin'] + '><td>Y Margin'
+        + '<tr><td><input id=max-time><td>Max Time'
+        + '<tr><td><input id=start-key maxlength=1><td>Start'
+        + '<tr><td><input id=y-margin><td>Y Margin'
         + '<tr><td colspan=2><input id=reset-button onclick=reset() type=button value=Reset>';
-    document.getElementById('display').value = settings['display'];
+    update_settings();
 
     // Set margin-top of game-area based on y-margin.
     document.getElementById('game-area').style.marginTop = document.getElementById('y-margin').value + 'px';
