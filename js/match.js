@@ -103,8 +103,8 @@ function settings_toggle(state){
 function start(){
     document.getElementById('attempted-matches').innerHTML = 0;
 
-    // Set margin-top of game-area based on y-margin.
-    document.getElementById('game-area').style.marginTop = settings['y-margin'] + 'px';
+    // Set margin-top of game-div based on y-margin.
+    document.getElementById('game-div').style.marginTop = settings['y-margin'] + 'px';
 
     // Generate button pairs.
     var loop_counter = 19;
@@ -163,7 +163,7 @@ function stop(){
     document.getElementById('start-button').value = 'Start [' + settings['start-key'] + ']';
     document.getElementById('start-button').onclick = start;
 
-    // Disable all game-area buttons.
+    // Disable all game-div buttons.
     var loop_counter = 19;
     do{
         document.getElementById(loop_counter).disabled = true;
@@ -235,10 +235,10 @@ window.onload = function(){
         + '<tr><td colspan=2><input id=reset-button onclick=reset() type=button value=Reset>';
     update_settings();
 
-    // Set margin-top of game-area based on y-margin.
-    document.getElementById('game-area').style.marginTop = document.getElementById('y-margin').value + 'px';
+    // Set margin-top of game-div based on y-margin.
+    document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
 
-    // Setup buttons in game-area.
+    // Setup buttons in game-div.
     var output = '';
 
     for(var loop_counter = 0; loop_counter < 20; loop_counter++){
@@ -251,7 +251,7 @@ window.onload = function(){
           + ' onclick=button_click(' + loop_counter
           + ') type=button value=->';
     }
-    document.getElementById('game-area').innerHTML = output;
+    document.getElementById('game-div').innerHTML = output;
 
     stop();
 };
