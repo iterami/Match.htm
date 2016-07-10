@@ -252,7 +252,7 @@ window.onload = function(){
             output += '<br>';
         }
         output +=
-          '<input class=gamebuttonclickable disabled id=' + loop_counter
+          '<input class=gridbuttonclickable disabled id=' + loop_counter
           + ' onclick=button_click(' + loop_counter
           + ') type=button value=" ">';
     }
