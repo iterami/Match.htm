@@ -121,7 +121,7 @@ function start(){
         document.getElementById(loop_counter).value = ' ';
 
         do{
-            temp = Math.floor(Math.random() * 20);
+            temp = random_integer(20);
         }while(tempinfo[temp] != -1);
 
         tempinfo[temp] = Math.floor(temp / 2);
