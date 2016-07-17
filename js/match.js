@@ -8,7 +8,7 @@ function button_click(button_id){
       'ABCDEFGHIJ'[button_values[button_id]],
       button_values[button_id],
       '~!@#$%^&*('[button_values[button_id]]
-    ][settings['display']];
+    ][settings_settings['display']];
 
     var loop_counter = 19;
     // If this is first button of button pair.
@@ -70,14 +70,14 @@ function button_click(button_id){
 
 function decisecond(){
     // If max-time is set, decrease time by .1sec, else add .1sec.
-    time = settings['max-time'] > 0
+    time = settings_settings['max-time'] > 0
       ? (parseFloat(time) - .1).toFixed(1)
       : (parseFloat(time) + .1).toFixed(1);
 
     document.getElementById('time').innerHTML = time;
 
     // If time can run out, check if game over.
-    if(settings['max-time'] > 0
+    if(settings_settings['max-time'] > 0
       && time <= 0){
         stop();
     }
@@ -99,12 +99,12 @@ function settings_toggle(state){
 }
 
 function start(){
-    save();
+    settings_save();
 
     document.getElementById('attempted-matches').innerHTML = 0;
 
     // Set margin-top of game-div based on y-margin.
-    document.getElementById('game-div').style.marginTop = settings['y-margin'] + 'px';
+    document.getElementById('game-div').style.marginTop = settings_settings['y-margin'] + 'px';
 
     // Generate button pairs.
     var loop_counter = 19;
@@ -132,10 +132,10 @@ function start(){
     document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
-    if(settings['max-time'] > 0){
+    if(settings_settings['max-time'] > 0){
         document.getElementById('if-time-limit').style.display = 'inline';
-        document.getElementById('time-max').innerHTML = settings['max-time'];
-        time = settings['max-time'];
+        document.getElementById('time-max').innerHTML = settings_settings['max-time'];
+        time = settings_settings['max-time'];
 
     }else{
         document.getElementById('if-time-limit').style.display = 'none';
@@ -153,7 +153,7 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start [' + settings['start-key'] + ']';
+    document.getElementById('start-button').value = 'Start [' + settings_settings['start-key'] + ']';
     document.getElementById('start-button').onclick = start;
 
     // Disable all game-div buttons.
@@ -201,7 +201,7 @@ var time = 0;
 window.onkeydown = function(e){
     var key = e.keyCode || e.which;
 
-    if(String.fromCharCode(key) === settings['start-key']){
+    if(String.fromCharCode(key) === settings_settings['start-key']){
         stop();
         start();
 
@@ -220,7 +220,7 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    init_settings(
+    settings_init(
       'Match.htm-',
       {
         'audio-volume': 1,
@@ -237,8 +237,8 @@ window.onload = function(){
         + '<tr><td><input id=max-time><td>Max Time'
         + '<tr><td><input id=start-key maxlength=1><td>Start'
         + '<tr><td><input id=y-margin><td>Y Margin'
-        + '<tr><td colspan=2><input id=reset-button onclick=reset() type=button value=Reset>';
-    update_settings();
+        + '<tr><td colspan=2><input id=reset-button onclick=settings_reset() type=button value=Reset>';
+    settings_update();
 
     // Set margin-top of game-div based on y-margin.
     document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
