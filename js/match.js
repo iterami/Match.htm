@@ -44,6 +44,11 @@ function button_click(button_id){
         // Set button values to -1 to prevent them from being reset.
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
+
+        audio_start(
+          'boop',
+          settings_settings['audio-volume']
+        );
     }
 
     // Check if there are any enabled buttons left.
@@ -228,6 +233,14 @@ window.onload = function(){
         'max-time': 0,
         'start-key': 'H',
         'y-margin': 0,
+      }
+    );
+    audio_init(settings['audio-volume']);
+    audio_create(
+      'boop',
+      {
+        'duration': .1,
+        'volume': .1,
       }
     );
 
