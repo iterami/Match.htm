@@ -276,5 +276,10 @@ window.onload = function(){
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);
 
+    document.getElementById('settings-button').onclick = function(){
+        settings_toggle();
+    };
+    document.getElementById('start-button').onclick = start;
+
     stop();
 };
