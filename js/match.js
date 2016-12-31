@@ -225,16 +225,16 @@ window.onkeydown = function(e){
 };
 
 window.onload = function(){
-    settings_init(
-      'Match.htm-',
-      {
+    settings_init({
+      'prefix': 'Match.htm-',
+      'settings': {
         'audio-volume': 1,
         'display': 1,
         'max-time': 0,
         'start-key': 'H',
         'y-margin': 0,
-      }
-    );
+      },
+    });
     audio_init({
       'volume': settings_settings['audio-volume'],
     });
