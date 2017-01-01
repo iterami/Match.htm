@@ -126,7 +126,9 @@ function start(){
         document.getElementById(loop_counter).value = ' ';
 
         do{
-            temp = random_integer(20);
+            temp = random_integer({
+              'max': 20,
+            });
         }while(tempinfo[temp] != -1);
 
         tempinfo[temp] = Math.floor(temp / 2);
