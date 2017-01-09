@@ -262,7 +262,6 @@ window.onload = function(){
 
     // Setup buttons in game-div.
     var output = '';
-
     for(var loop_counter = 0; loop_counter < 20; loop_counter++){
         if(loop_counter % 5 === 0
           && loop_counter !== 0){
