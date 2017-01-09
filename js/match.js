@@ -273,7 +273,7 @@ window.onload = function(){
           + ' onclick=button_click(' + loop_counter
           + ') type=button value=" ">';
     }
-    document.getElementById('game-div').innerHTML = output;
+    document.getElementById('game-div').innerHTML = output + '<br>';
 
     var loop_counter = 19;
     do{
