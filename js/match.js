@@ -205,27 +205,6 @@ var interval = 0;
 var selected_button = [-1, -1,];
 var time = 0;
 
-window.onkeydown = function(e){
-    var key = e.keyCode || e.which;
-
-    if(String.fromCharCode(key) === settings_settings['start-key']){
-        stop();
-        start();
-
-    // ESC: stop current game.
-    }else if(key === 27){
-        stop();
-
-    // +: show settings.
-    }else if(key === 187){
-        settings_toggle(true);
-
-    // -: hide settings.
-    }else if(key === 189){
-        settings_toggle(false);
-    }
-};
-
 window.onload = function(){
     settings_init({
       'prefix': 'Match.htm-',
@@ -285,4 +264,25 @@ window.onload = function(){
     document.getElementById('start-button').onclick = start;
 
     stop();
+
+    window.onkeydown = function(e){
+        var key = e.keyCode || e.which;
+
+        if(String.fromCharCode(key) === settings_settings['start-key']){
+            stop();
+            start();
+
+        // ESC: stop current game.
+        }else if(key === 27){
+            stop();
+
+        // +: show settings.
+        }else if(key === 187){
+            settings_toggle(true);
+
+        // -: hide settings.
+        }else if(key === 189){
+            settings_toggle(false);
+        }
+    };
 };
