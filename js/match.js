@@ -8,7 +8,7 @@ function button_click(button_id){
       'ABCDEFGHIJ'[button_values[button_id]],
       button_values[button_id],
       '~!@#$%^&*('[button_values[button_id]]
-    ][settings_settings['display']];
+    ][storage_data['display']];
 
     var loop_counter = 19;
     // If this is first button of button pair.
@@ -47,7 +47,7 @@ function button_click(button_id){
 
         audio_start({
           'id': 'boop',
-          'volume-multiplier': settings_settings['audio-volume'],
+          'volume-multiplier': storage_data['audio-volume'],
         });
     }
 
@@ -75,14 +75,14 @@ function button_click(button_id){
 
 function decisecond(){
     // If max-time is set, decrease time by .1sec, else add .1sec.
-    time = settings_settings['max-time'] > 0
+    time = storage_data['max-time'] > 0
       ? (parseFloat(time) - .1).toFixed(1)
       : (parseFloat(time) + .1).toFixed(1);
 
     document.getElementById('time').innerHTML = time;
 
     // If time can run out, check if game over.
-    if(settings_settings['max-time'] > 0
+    if(storage_data['max-time'] > 0
       && time <= 0){
         stop();
     }
@@ -104,12 +104,12 @@ function settings_toggle(state){
 }
 
 function start(){
-    settings_save();
+    storage_save();
 
     document.getElementById('attempted-matches').innerHTML = 0;
 
     // Set margin-top of game-div based on y-margin.
-    document.getElementById('game-div').style.marginTop = settings_settings['y-margin'] + 'px';
+    document.getElementById('game-div').style.marginTop = storage_data['y-margin'] + 'px';
 
     // Generate button pairs.
     var loop_counter = 19;
@@ -139,10 +139,10 @@ function start(){
     document.getElementById('start-button').onclick = stop;
 
     // Display time limit if it is greater than 0.
-    if(settings_settings['max-time'] > 0){
+    if(storage_data['max-time'] > 0){
         document.getElementById('if-time-limit').style.display = 'inline';
-        document.getElementById('time-max').innerHTML = settings_settings['max-time'];
-        time = settings_settings['max-time'];
+        document.getElementById('time-max').innerHTML = storage_data['max-time'];
+        time = storage_data['max-time'];
 
     }else{
         document.getElementById('if-time-limit').style.display = 'none';
@@ -160,7 +160,7 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start [' + settings_settings['start-key'] + ']';
+    document.getElementById('start-button').value = 'Start [' + storage_data['start-key'] + ']';
     document.getElementById('start-button').onclick = start;
 
     // Disable all game-div buttons.
@@ -206,18 +206,18 @@ var selected_button = [-1, -1,];
 var time = 0;
 
 window.onload = function(){
-    settings_init({
-      'prefix': 'Match.htm-',
-      'settings': {
+    storage_init({
+      'data': {
         'audio-volume': 1,
         'display': 1,
         'max-time': 0,
         'start-key': 'H',
         'y-margin': 0,
       },
+      'prefix': 'Match.htm-',
     });
     audio_init({
-      'volume': settings_settings['audio-volume'],
+      'volume': storage_data['audio-volume'],
     });
     audio_create({
       'id': 'boop',
@@ -228,13 +228,13 @@ window.onload = function(){
     });
 
     document.getElementById('settings').innerHTML =
-      '<tr><td colspan=2><input id=reset-button onclick=settings_reset() type=button value=Reset>'
+      '<tr><td colspan=2><input id=reset-button onclick=storage_reset() type=button value=Reset>'
         + '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
         + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
         + '<tr><td><input id=max-time><td>Max Time'
         + '<tr><td><input id=start-key maxlength=1><td>Start'
         + '<tr><td><input id=y-margin><td>Y Margin';
-    settings_update();
+    storage_update();
 
     // Set margin-top of game-div based on y-margin.
     document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
@@ -268,7 +268,7 @@ window.onload = function(){
     window.onkeydown = function(e){
         var key = e.keyCode || e.which;
 
-        if(String.fromCharCode(key) === settings_settings['start-key']){
+        if(String.fromCharCode(key) === storage_data['start-key']){
             stop();
             start();
 
