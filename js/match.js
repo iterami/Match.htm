@@ -88,6 +88,88 @@ function decisecond(){
     }
 }
 
+function repo_init(){
+    core_storage_init({
+      'data': {
+        'audio-volume': 1,
+        'display': 1,
+        'max-time': 0,
+        'start-key': 'H',
+        'y-margin': 0,
+      },
+      'prefix': 'Match.htm-',
+    });
+    audio_init({
+      'volume': core_storage_data['audio-volume'],
+    });
+    audio_create({
+      'id': 'boop',
+      'properties': {
+        'duration': .1,
+        'volume': .1,
+      },
+    });
+
+    document.getElementById('settings').innerHTML =
+      '<tr><td colspan=2><input id=reset-button onclick=core_storage_reset() type=button value=Reset>'
+        + '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
+        + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
+        + '<tr><td><input id=max-time><td>Max Time'
+        + '<tr><td><input id=start-key maxlength=1><td>Start'
+        + '<tr><td><input id=y-margin><td>Y Margin';
+    core_storage_update();
+
+    // Set margin-top of game-div based on y-margin.
+    document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
+
+    // Setup buttons in game-div.
+    var output = '';
+    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
+        if(loop_counter % 5 === 0
+          && loop_counter !== 0){
+            output += '<br>';
+        }
+        output +=
+          '<input class=gridbuttonclickable disabled id=' + loop_counter
+          + ' onclick=button_click(' + loop_counter
+          + ') type=button value=" ">';
+    }
+    document.getElementById('game-div').innerHTML = output + '<br>';
+
+    var loop_counter = 19;
+    do{
+        document.getElementById(loop_counter).style.background = colors['default'];
+    }while(loop_counter--);
+
+    document.getElementById('settings-button').onclick = function(){
+        settings_toggle();
+    };
+    document.getElementById('start-button').onclick = start;
+
+    stop();
+
+    window.onkeydown = function(e){
+        var key = e.keyCode || e.which;
+
+        if(String.fromCharCode(key) === core_storage_data['start-key']){
+            stop();
+            start();
+
+        // ESC: stop current game.
+        }else if(key === 27){
+            stop();
+
+        // +: show settings.
+        }else if(key === 187){
+            settings_toggle(true);
+
+        // -: hide settings.
+        }else if(key === 189){
+            settings_toggle(false);
+        }
+    };
+}
+
 function settings_toggle(state){
     state = state == void 0
       ? document.getElementById('settings-button').value === '+'
@@ -204,85 +286,3 @@ var colors = {
 var interval = 0;
 var selected_button = [-1, -1,];
 var time = 0;
-
-window.onload = function(){
-    core_storage_init({
-      'data': {
-        'audio-volume': 1,
-        'display': 1,
-        'max-time': 0,
-        'start-key': 'H',
-        'y-margin': 0,
-      },
-      'prefix': 'Match.htm-',
-    });
-    audio_init({
-      'volume': core_storage_data['audio-volume'],
-    });
-    audio_create({
-      'id': 'boop',
-      'properties': {
-        'duration': .1,
-        'volume': .1,
-      },
-    });
-
-    document.getElementById('settings').innerHTML =
-      '<tr><td colspan=2><input id=reset-button onclick=core_storage_reset() type=button value=Reset>'
-        + '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
-        + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
-        + '<tr><td><input id=max-time><td>Max Time'
-        + '<tr><td><input id=start-key maxlength=1><td>Start'
-        + '<tr><td><input id=y-margin><td>Y Margin';
-    core_storage_update();
-
-    // Set margin-top of game-div based on y-margin.
-    document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
-
-    // Setup buttons in game-div.
-    var output = '';
-    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % 5 === 0
-          && loop_counter !== 0){
-            output += '<br>';
-        }
-        output +=
-          '<input class=gridbuttonclickable disabled id=' + loop_counter
-          + ' onclick=button_click(' + loop_counter
-          + ') type=button value=" ">';
-    }
-    document.getElementById('game-div').innerHTML = output + '<br>';
-
-    var loop_counter = 19;
-    do{
-        document.getElementById(loop_counter).style.background = colors['default'];
-    }while(loop_counter--);
-
-    document.getElementById('settings-button').onclick = function(){
-        settings_toggle();
-    };
-    document.getElementById('start-button').onclick = start;
-
-    stop();
-
-    window.onkeydown = function(e){
-        var key = e.keyCode || e.which;
-
-        if(String.fromCharCode(key) === core_storage_data['start-key']){
-            stop();
-            start();
-
-        // ESC: stop current game.
-        }else if(key === 27){
-            stop();
-
-        // +: show settings.
-        }else if(key === 187){
-            settings_toggle(true);
-
-        // -: hide settings.
-        }else if(key === 189){
-            settings_toggle(false);
-        }
-    };
-};
