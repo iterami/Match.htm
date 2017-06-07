@@ -89,15 +89,15 @@ function decisecond(){
 }
 
 function repo_init(){
-    core_storage_init({
-      'data': {
+    core_repo_init({
+      'storage': {
         'audio-volume': 1,
         'display': 1,
         'max-time': 0,
         'start-key': 'H',
         'y-margin': 0,
       },
-      'prefix': 'Match.htm-',
+      'title': 'Match.htm',
     });
     audio_init({
       'volume': core_storage_data['audio-volume'],
