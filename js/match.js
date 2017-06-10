@@ -88,13 +88,34 @@ function decisecond(){
     }
 }
 
+function repo_escape(){
+    stop();
+}
+
 function repo_init(){
     core_repo_init({
+      'keybinds': {
+        72: {
+          'todo': function(){
+              stop();
+              start();
+          },
+        },
+        187: {
+          'todo': function(){
+              settings_toggle(true);
+          },
+        },
+        189: {
+          'todo': function(){
+              settings_toggle(false);
+          },
+        },
+      },
       'storage': {
         'audio-volume': 1,
         'display': 1,
         'max-time': 0,
-        'start-key': 'H',
         'y-margin': 0,
       },
       'title': 'Match.htm',
@@ -115,7 +136,6 @@ function repo_init(){
         + '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
         + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
         + '<tr><td><input id=max-time><td>Max Time'
-        + '<tr><td><input id=start-key maxlength=1><td>Start'
         + '<tr><td><input id=y-margin><td>Y Margin';
     core_storage_update();
 
@@ -147,27 +167,6 @@ function repo_init(){
     document.getElementById('start-button').onclick = start;
 
     stop();
-
-    window.onkeydown = function(e){
-        var key = e.keyCode || e.which;
-
-        if(String.fromCharCode(key) === core_storage_data['start-key']){
-            stop();
-            start();
-
-        // ESC: stop current game.
-        }else if(key === 27){
-            stop();
-
-        // +: show settings.
-        }else if(key === 187){
-            settings_toggle(true);
-
-        // -: hide settings.
-        }else if(key === 189){
-            settings_toggle(false);
-        }
-    };
 }
 
 function settings_toggle(state){
@@ -242,7 +241,7 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start [' + core_storage_data['start-key'] + ']';
+    document.getElementById('start-button').value = 'Start [H]';
     document.getElementById('start-button').onclick = start;
 
     // Disable all game-div buttons.
