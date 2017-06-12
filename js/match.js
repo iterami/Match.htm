@@ -101,16 +101,6 @@ function repo_init(){
               start();
           },
         },
-        187: {
-          'todo': function(){
-              settings_toggle(true);
-          },
-        },
-        189: {
-          'todo': function(){
-              settings_toggle(false);
-          },
-        },
       },
       'storage': {
         'audio-volume': 1,
@@ -118,6 +108,7 @@ function repo_init(){
         'max-time': 0,
         'y-margin': 0,
       },
+      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select>Display<br><input id=max-time>Max Time<br><input id=y-margin>Y Margin',
       'title': 'Match.htm',
     });
     audio_init({
@@ -130,14 +121,6 @@ function repo_init(){
         'volume': .1,
       },
     });
-
-    document.getElementById('settings').innerHTML =
-      '<tr><td colspan=2><input id=reset-button onclick=core_storage_reset() type=button value=Reset>'
-        + '<tr><td><input id=audio-volume max=1 min=0 step=0.01 type=range><td>Audio'
-        + '<tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display'
-        + '<tr><td><input id=max-time><td>Max Time'
-        + '<tr><td><input id=y-margin><td>Y Margin';
-    core_storage_update();
 
     // Set margin-top of game-div based on y-margin.
     document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
@@ -161,27 +144,9 @@ function repo_init(){
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);
 
-    document.getElementById('settings-button').onclick = function(){
-        settings_toggle();
-    };
     document.getElementById('start-button').onclick = start;
 
     stop();
-}
-
-function settings_toggle(state){
-    state = state == void 0
-      ? document.getElementById('settings-button').value === '+'
-      : state;
-
-    if(state){
-        document.getElementById('settings').style.display = 'inline-block';
-        document.getElementById('settings-button').value = '-';
-
-    }else{
-        document.getElementById('settings').style.display = 'none';
-        document.getElementById('settings-button').value = '+';
-    }
 }
 
 function start(){
