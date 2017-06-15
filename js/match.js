@@ -45,9 +45,8 @@ function button_click(button_id){
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
 
-        audio_start({
+        core_audio_start({
           'id': 'boop',
-          'volume-multiplier': core_storage_data['audio-volume'],
         });
     }
 
@@ -103,22 +102,17 @@ function repo_init(){
         },
       },
       'storage': {
-        'audio-volume': 1,
         'display': 1,
         'max-time': 0,
         'y-margin': 0,
       },
-      'storage-menu': '<input id=audio-volume max=1 min=0 step=0.01 type=range>Audio<br><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select>Display<br><input id=max-time>Max Time<br><input id=y-margin>Y Margin',
+      'storage-menu': '<select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select>Display<br><input id=max-time>Max Time<br><input id=y-margin>Y Margin',
       'title': 'Match.htm',
     });
-    audio_init({
-      'volume': core_storage_data['audio-volume'],
-    });
-    audio_create({
+    core_audio_create({
       'id': 'boop',
       'properties': {
         'duration': .1,
-        'volume': .1,
       },
     });
 
