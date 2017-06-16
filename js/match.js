@@ -106,7 +106,7 @@ function repo_init(){
         'max-time': 0,
         'y-margin': 0,
       },
-      'storage-menu': '<select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select>Display<br><input id=max-time>Max Time<br><input id=y-margin>Y Margin',
+      'storage-menu': '<table><tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display<tr><td><input id=max-time><td>Max Time<tr><td><input id=y-margin><td>Y Margin</table>',
       'title': 'Match.htm',
     });
     core_audio_create({
