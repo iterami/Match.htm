@@ -93,6 +93,11 @@ function repo_escape(){
 
 function repo_init(){
     core_repo_init({
+      'audios': {
+        'boop': {
+          'duration': .1,
+        },
+      },
       'keybinds': {
         72: {
           'todo': function(){
@@ -108,12 +113,6 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display<tr><td><input id=max-time><td>Max Time<tr><td><input id=y-margin><td>Y Margin</table>',
       'title': 'Match.htm',
-    });
-    core_audio_create({
-      'id': 'boop',
-      'properties': {
-        'duration': .1,
-      },
     });
 
     // Set margin-top of game-div based on y-margin.
