@@ -109,14 +109,10 @@ function repo_init(){
       'storage': {
         'display': 1,
         'max-time': 0,
-        'y-margin': 0,
       },
-      'storage-menu': '<table><tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display<tr><td><input id=max-time><td>Max Time<tr><td><input id=y-margin><td>Y Margin</table>',
+      'storage-menu': '<table><tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display<tr><td><input id=max-time><td>Max Time</table>',
       'title': 'Match.htm',
     });
-
-    // Set margin-top of game-div based on y-margin.
-    document.getElementById('game-div').style.marginTop = document.getElementById('y-margin').value + 'px';
 
     // Setup buttons in game-div.
     var output = '';
@@ -146,9 +142,6 @@ function start(){
     core_storage_save();
 
     document.getElementById('attempted-matches').innerHTML = 0;
-
-    // Set margin-top of game-div based on y-margin.
-    document.getElementById('game-div').style.marginTop = core_storage_data['y-margin'] + 'px';
 
     // Generate button pairs.
     var loop_counter = 19;
