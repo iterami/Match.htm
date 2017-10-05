@@ -2,9 +2,10 @@
 
 function button_click(button_id){
     // Set button color and value.
-    document.getElementById(button_id).style.background = colors[button_values[button_id]];
+    var element = document.getElementById(button_id);
+    element.style.background = colors[button_values[button_id]];
 
-    document.getElementById(button_id).value = [
+    element.value = [
       'ABCDEFGHIJ'[button_values[button_id]],
       button_values[button_id],
       '~!@#$%^&*('[button_values[button_id]]
@@ -17,8 +18,9 @@ function button_click(button_id){
         do{
             if(button_values[loop_counter] > -1
               && loop_counter !== button_id){
-                document.getElementById(loop_counter).style.background = colors['default'];
-                document.getElementById(loop_counter).value = ' ';
+                element = document.getElementById(loop_counter);
+                element.style.background = colors['default'];
+                element.value = ' ';
             }
         }while(loop_counter--);
 
@@ -34,8 +36,9 @@ function button_click(button_id){
         return;
     }
 
-    document.getElementById('attempted-matches').innerHTML = parseInt(
-      document.getElementById('attempted-matches').innerHTML,
+    element = document.getElementById('attempted-matches');
+    element.innerHTML = parseInt(
+      element.innerHTML,
       10
     ) + 1;
 
@@ -153,9 +156,10 @@ function start(){
     ];
     var temp = 0;
     do{
-        document.getElementById(loop_counter).disabled = false;
-        document.getElementById(loop_counter).style.background = colors['default'];
-        document.getElementById(loop_counter).value = ' ';
+        var element = document.getElementById(loop_counter);
+        element.disabled = false;
+        element.style.background = colors['default'];
+        element.value = ' ';
 
         do{
             temp = core_random_integer({
@@ -167,8 +171,9 @@ function start(){
         button_values[loop_counter] = Math.floor(temp / 2);
     }while(loop_counter--);
 
-    document.getElementById('start-button').value = 'End [ESC]';
-    document.getElementById('start-button').onclick = stop;
+    var element = document.getElementById('start-button');
+    element.value = 'End [ESC]';
+    element.onclick = stop;
 
     // Display time limit if it is greater than 0.
     if(core_storage_data['max-time'] > 0){
@@ -192,8 +197,9 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    document.getElementById('start-button').value = 'Start [H]';
-    document.getElementById('start-button').onclick = start;
+    var element = document.getElementById('start-button');
+    element.value = 'Start [H]';
+    element.onclick = start;
 
     // Disable all game-div buttons.
     var loop_counter = 19;
