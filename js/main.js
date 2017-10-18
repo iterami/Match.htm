@@ -11,6 +11,11 @@ function repo_init(){
           'duration': .1,
         },
       },
+      'info-events': {
+        'start-button': {
+          'todo': start,
+        },
+      },
       'keybinds': {
         72: {
           'todo': function(){
@@ -45,8 +50,6 @@ function repo_init(){
     do{
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);
-
-    document.getElementById('start-button').onclick = start;
 
     stop();
 }
