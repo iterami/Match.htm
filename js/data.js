@@ -120,9 +120,13 @@ function start(){
         button_values[loop_counter] = Math.floor(temp / 2);
     }while(loop_counter--);
 
-    var element = document.getElementById('start-button');
-    element.value = 'End [ESC]';
-    element.onclick = stop;
+    core_html_modify({
+      'id': 'start-button',
+      'properties': {
+        'onclick': stop,
+        'value': 'End [ESC]',
+      },
+    });
 
     // Display time limit if it is greater than 0.
     if(core_storage_data['max-time'] > 0){
@@ -146,9 +150,13 @@ function start(){
 function stop(){
     window.clearInterval(interval);
 
-    var element = document.getElementById('start-button');
-    element.value = 'Start [H]';
-    element.onclick = start;
+    core_html_modify({
+      'id': 'start-button',
+      'properties': {
+        'onclick': start,
+        'value': 'Start [H]',
+      },
+    });
 
     // Disable all game-div buttons.
     var loop_counter = 19;
