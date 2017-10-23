@@ -11,6 +11,30 @@ function repo_init(){
           'duration': .1,
         },
       },
+      'globals': {
+        'button_values': [
+          -1,-1,-1,-1,-1,
+          -1,-1,-1,-1,-1,
+          -1,-1,-1,-1,-1,
+          -1,-1,-1,-1,-1,
+        ],
+        'colors': {
+          'default': '#2a2a2a',
+          '0': '#c83232',
+          '1': '#ff7d0a',
+          '2': '#2d8930',
+          '3': '#6cd',
+          '4': '#f58cba',
+          '5': '#476291',
+          '6': '#fd0',
+          '7': '#8650ac',
+          '8': '#c79c6e',
+          '9': '#70550f',
+        },
+        'interval': 0,
+        'selected_button': [-1, -1,],
+        'time': 0,
+      },
       'info-events': {
         'start-button': {
           'todo': start,
