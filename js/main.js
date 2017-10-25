@@ -11,6 +11,11 @@ function repo_init(){
           'duration': .1,
         },
       },
+      'events': {
+        'start-button': {
+          'onclick': start,
+        },
+      },
       'globals': {
         'button_values': [
           -1,-1,-1,-1,-1,
@@ -34,11 +39,6 @@ function repo_init(){
         'interval': 0,
         'selected_button': [-1, -1,],
         'time': 0,
-      },
-      'info-events': {
-        'start-button': {
-          'todo': start,
-        },
       },
       'keybinds': {
         72: {
