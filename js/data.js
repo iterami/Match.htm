@@ -91,7 +91,9 @@ function decisecond(){
 }
 
 function start(){
-    core_storage_save();
+    if(core_menu_open){
+        core_escape();
+    }
 
     document.getElementById('attempted-matches').innerHTML = 0;
 
@@ -120,14 +122,6 @@ function start(){
         button_values[loop_counter] = Math.floor(temp / 2);
     }while(loop_counter--);
 
-    core_html_modify({
-      'id': 'start-button',
-      'properties': {
-        'onclick': stop,
-        'value': 'End [ESC]',
-      },
-    });
-
     // Display time limit if it is greater than 0.
     if(core_storage_data['max-time'] > 0){
         document.getElementById('if-time-limit').style.display = 'inline';
@@ -141,23 +135,14 @@ function start(){
 
     document.getElementById('time').innerHTML = time;
 
-    interval = window.setInterval(
-      decisecond,
-      100
-    );
+    core_interval_modify({
+      'id': 'interval',
+      'interval': 100,
+      'todo': decisecond,
+    });
 }
 
 function stop(){
-    window.clearInterval(interval);
-
-    core_html_modify({
-      'id': 'start-button',
-      'properties': {
-        'onclick': start,
-        'value': 'Start [H]',
-      },
-    });
-
     // Disable all game-div buttons.
     var loop_counter = 19;
     do{

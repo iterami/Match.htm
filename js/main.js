@@ -36,10 +36,10 @@ function repo_init(){
           '8': '#c79c6e',
           '9': '#70550f',
         },
-        'interval': 0,
         'selected_button': [-1, -1,],
         'time': 0,
       },
+      'info': '<input id=start-button type=button value=Restart>',
       'keybinds': {
         72: {
           'todo': function(){
@@ -75,5 +75,5 @@ function repo_init(){
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);
 
-    stop();
+    start();
 }
