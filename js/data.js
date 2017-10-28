@@ -1,6 +1,10 @@
 'use strict';
 
 function button_click(button_id){
+    if(core_menu_open){
+        return;
+    }
+
     // Set button color and value.
     var element = document.getElementById(button_id);
     element.style.background = colors[button_values[button_id]];

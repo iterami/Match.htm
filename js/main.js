@@ -1,9 +1,5 @@
 'use strict';
 
-function repo_escape(){
-    stop();
-}
-
 function repo_init(){
     core_repo_init({
       'audios': {
