@@ -9,7 +9,10 @@ function repo_init(){
       },
       'events': {
         'start-button': {
-          'onclick': start,
+          'onclick': function(){
+              core_escape();
+              start();
+          },
         },
       },
       'globals': {
@@ -44,6 +47,7 @@ function repo_init(){
           },
         },
       },
+      'menu': true,
       'storage': {
         'display': 1,
         'max-time': 0,
@@ -70,6 +74,4 @@ function repo_init(){
     do{
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);
-
-    start();
 }

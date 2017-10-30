@@ -95,10 +95,6 @@ function decisecond(){
 }
 
 function start(){
-    if(core_menu_open){
-        core_escape();
-    }
-
     document.getElementById('attempted-matches').innerHTML = 0;
 
     // Generate button pairs.
