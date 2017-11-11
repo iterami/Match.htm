@@ -49,10 +49,10 @@ function repo_init(){
       },
       'menu': true,
       'storage': {
-        'display': 1,
+        'display': '0123456789',
         'max-time': 0,
       },
-      'storage-menu': '<table><tr><td><select id=display><option value=0>Letters</option><option value=1>Numbers</option><option value=2>Symbols</option></select><td>Display<tr><td><input id=max-time><td>Max Time</table>',
+      'storage-menu': '<table><tr><td><input id=display><td>Display<tr><td><input id=max-time><td>Max Time</table>',
       'title': 'Match.htm',
     });
 

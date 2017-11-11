@@ -8,12 +8,7 @@ function button_click(button_id){
     // Set button color and value.
     var element = document.getElementById(button_id);
     element.style.background = colors[button_values[button_id]];
-
-    element.value = [
-      'ABCDEFGHIJ'[button_values[button_id]],
-      button_values[button_id],
-      '~!@#$%^&*('[button_values[button_id]]
-    ][core_storage_data['display']];
+    element.value = core_storage_data['display'][button_values[button_id]];
 
     var loop_counter = 19;
     // If this is first button of button pair.
