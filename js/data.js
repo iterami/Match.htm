@@ -75,18 +75,18 @@ function button_click(button_id){
 }
 
 function decisecond(){
+    if(!game_running
+      || (core_storage_data['max-time'] > 0
+        && time <= 0)){
+        stop();
+        return;
+    }
+
     // If max-time is set, decrease time by .1sec, else add .1sec.
     time = core_storage_data['max-time'] > 0
       ? (parseFloat(time) - .1).toFixed(1)
       : (parseFloat(time) + .1).toFixed(1);
-
     document.getElementById('time').innerHTML = time;
-
-    // If time can run out, check if game over.
-    if(core_storage_data['max-time'] > 0
-      && time <= 0){
-        stop();
-    }
 }
 
 function start(){
@@ -130,6 +130,7 @@ function start(){
 
     document.getElementById('time').innerHTML = time;
 
+    game_running = true;
     core_interval_modify({
       'id': 'interval',
       'interval': 100,
@@ -138,6 +139,9 @@ function start(){
 }
 
 function stop(){
+    core_interval_pause_all();
+    game_running = false;
+
     // Disable all game-div buttons.
     var loop_counter = 19;
     do{

@@ -35,6 +35,7 @@ function repo_init(){
           '8': '#c79c6e',
           '9': '#70550f',
         },
+        'game_running': false,
         'selected_button': [-1, -1,],
         'time': 0,
       },
