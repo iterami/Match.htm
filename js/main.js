@@ -51,9 +51,8 @@ function repo_init(){
       'menu': true,
       'storage': {
         'display': '0123456789',
-        'max-time': 0,
       },
-      'storage-menu': '<table><tr><td><input id=display><td>Display<tr><td><input id=max-time><td>Max Time</table>',
+      'storage-menu': '<table><tr><td><input id=display><td>Display</table>',
       'title': 'Match.htm',
     });
 

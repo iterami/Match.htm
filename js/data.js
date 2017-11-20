@@ -75,17 +75,12 @@ function button_click(button_id){
 }
 
 function decisecond(){
-    if(!game_running
-      || (core_storage_data['max-time'] > 0
-        && time <= 0)){
+    if(!game_running){
         stop();
         return;
     }
 
-    // If max-time is set, decrease time by .1sec, else add .1sec.
-    time = core_storage_data['max-time'] > 0
-      ? (parseFloat(time) - .1).toFixed(1)
-      : (parseFloat(time) + .1).toFixed(1);
+    time = (parseFloat(time) + .1).toFixed(1);
     document.getElementById('time').innerHTML = time;
 }
 
@@ -117,17 +112,7 @@ function start(){
         button_values[loop_counter] = Math.floor(temp / 2);
     }while(loop_counter--);
 
-    // Display time limit if it is greater than 0.
-    if(core_storage_data['max-time'] > 0){
-        document.getElementById('if-time-limit').style.display = 'inline';
-        document.getElementById('time-max').innerHTML = core_storage_data['max-time'];
-        time = core_storage_data['max-time'];
-
-    }else{
-        document.getElementById('if-time-limit').style.display = 'none';
-        time = 0;
-    }
-
+    time = 0;
     document.getElementById('time').innerHTML = time;
 
     game_running = true;
