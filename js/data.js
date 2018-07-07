@@ -36,7 +36,7 @@ function button_click(button_id){
     }
 
     element = document.getElementById('attempted-matches');
-    element.innerHTML = parseInt(
+    element.innerHTML = Number.parseInt(
       element.innerHTML,
       10
     ) + 1;
