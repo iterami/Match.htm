@@ -57,8 +57,8 @@ function repo_init(){
     });
 
     // Setup buttons in game-div.
-    var output = '';
-    for(var loop_counter = 0; loop_counter < 20; loop_counter++){
+    let output = '';
+    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
         if(loop_counter % 5 === 0
           && loop_counter !== 0){
             output += '<br>';
@@ -70,7 +70,7 @@ function repo_init(){
     }
     document.getElementById('game-div').innerHTML = output + '<br>';
 
-    var loop_counter = 19;
+    let loop_counter = 19;
     do{
         document.getElementById(loop_counter).style.background = colors['default'];
     }while(loop_counter--);

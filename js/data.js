@@ -6,11 +6,11 @@ function button_click(button_id){
     }
 
     // Set button color and value.
-    var element = document.getElementById(button_id);
+    let element = document.getElementById(button_id);
     element.style.background = colors[button_values[button_id]];
     element.value = core_storage_data['display'][button_values[button_id]];
 
-    var loop_counter = 19;
+    let loop_counter = 19;
     // If this is first button of button pair.
     if(selected_button[0] === -1){
         // Reset other buttons that haven't been matched yet.
@@ -53,9 +53,9 @@ function button_click(button_id){
     }
 
     // Check if there are any enabled buttons left.
-    var buttons_remain = false;
+    let buttons_remain = false;
     do{
-        var disabled = button_values[loop_counter] < 0;
+        let disabled = button_values[loop_counter] < 0;
         document.getElementById(loop_counter).disabled = disabled;
 
         if(!disabled){
@@ -88,16 +88,16 @@ function start(){
     document.getElementById('attempted-matches').innerHTML = 0;
 
     // Generate button pairs.
-    var loop_counter = 19;
-    var tempinfo = [
+    let loop_counter = 19;
+    let tempinfo = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
     ];
-    var temp = 0;
+    let temp = 0;
     do{
-        var element = document.getElementById(loop_counter);
+        let element = document.getElementById(loop_counter);
         element.disabled = false;
         element.style.background = colors['default'];
         element.value = ' ';
@@ -128,7 +128,7 @@ function stop(){
     game_running = false;
 
     // Disable all game-div buttons.
-    var loop_counter = 19;
+    let loop_counter = 19;
     do{
         document.getElementById(loop_counter).disabled = true;
     }while(loop_counter--);
