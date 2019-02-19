@@ -75,7 +75,7 @@ function button_click(button_id){
 }
 
 function decisecond(){
-    if(!game_running){
+    if(core_mode === 0){
         stop();
         return;
     }
@@ -115,7 +115,7 @@ function start(){
     time = 0;
     document.getElementById('time').innerHTML = time;
 
-    game_running = true;
+    core_mode = 1;
     core_interval_modify({
       'id': 'interval',
       'interval': 100,
@@ -125,7 +125,7 @@ function start(){
 
 function stop(){
     core_interval_pause_all();
-    game_running = false;
+    core_mode = 0;
 
     // Disable all game-div buttons.
     let loop_counter = 19;
