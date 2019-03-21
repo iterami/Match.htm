@@ -80,7 +80,10 @@ function decisecond(){
         return;
     }
 
-    time = (Number.parseFloat(time) + .1).toFixed(1);
+    time = core_round({
+      'decimals': 1,
+      'number': Number.parseFloat(time) + .1,
+    });
     document.getElementById('time').innerHTML = time;
 }
 
