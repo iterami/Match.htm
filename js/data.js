@@ -47,7 +47,7 @@ function button_click(button_id){
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
 
-        core_audio_start({
+        audio_start({
           'id': 'boop',
         });
     }

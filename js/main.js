@@ -2,11 +2,6 @@
 
 function repo_init(){
     core_repo_init({
-      'audios': {
-        'boop': {
-          'duration': .1,
-        },
-      },
       'events': {
         'start-button': {
           'onclick': function(){
@@ -53,6 +48,13 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><input id=display><td>Display</table>',
       'title': 'Match.htm',
+    });
+    audio_create({
+      'audios': {
+        'boop': {
+          'duration': .1,
+        },
+      },
     });
 
     // Setup buttons in game-div.
