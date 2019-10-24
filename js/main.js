@@ -60,6 +60,11 @@ function repo_init(){
         },
       },
     });
+    core_html_store({
+      'ids': [
+        'time',
+      ],
+    });
 
     // Setup buttons in game-div.
     let output = '';

@@ -84,7 +84,7 @@ function decisecond(){
       'decimals': 1,
       'number': Number.parseFloat(time) + .1,
     });
-    document.getElementById('time').innerHTML = time;
+    core_elements['time'].innerHTML = time;
 }
 
 function start(){
@@ -116,7 +116,7 @@ function start(){
     }while(loop_counter--);
 
     time = 0;
-    document.getElementById('time').innerHTML = time;
+    core_elements['time'].innerHTML = time;
 
     core_mode = 1;
     core_interval_modify({
