@@ -84,7 +84,10 @@ function decisecond(){
       'decimals': 1,
       'number': Number.parseFloat(time) + .1,
     });
-    core_elements['time'].innerHTML = time;
+    core_elements['time'].innerHTML = core_number_format({
+      'decimals-min': 1,
+      'number': time,
+    });
 }
 
 function start(){
