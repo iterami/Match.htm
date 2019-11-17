@@ -41,11 +41,10 @@ function repo_init(){
       'menu': true,
       'reset': function(){
           stop();
-          start();
-
           if(core_menu_open){
               core_escape();
           }
+          start();
       },
       'storage': {
         'display': '0123456789',
