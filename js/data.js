@@ -112,7 +112,7 @@ function start(){
             temp = core_random_integer({
               'max': 20,
             });
-        }while(tempinfo[temp] != -1);
+        }while(tempinfo[temp] !== -1);
 
         tempinfo[temp] = Math.floor(temp / 2);
         button_values[loop_counter] = Math.floor(temp / 2);
