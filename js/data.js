@@ -36,8 +36,8 @@ function button_click(button_id){
     }
 
     element = document.getElementById('attempted-matches');
-    element.innerHTML = Number.parseInt(
-      element.innerHTML,
+    element.textContent = Number.parseInt(
+      element.textContent,
       10
     ) + 1;
 
@@ -84,14 +84,14 @@ function decisecond(){
       'decimals': 1,
       'number': Number.parseFloat(time) + .1,
     });
-    core_elements['time'].innerHTML = core_number_format({
+    core_elements['time'].textContent = core_number_format({
       'decimals-min': 1,
       'number': time,
     });
 }
 
 function start(){
-    document.getElementById('attempted-matches').innerHTML = 0;
+    document.getElementById('attempted-matches').textContent = 0;
 
     // Generate button pairs.
     let loop_counter = 19;
@@ -119,7 +119,7 @@ function start(){
     }while(loop_counter--);
 
     time = 0;
-    core_elements['time'].innerHTML = time;
+    core_elements['time'].textContent = time;
 
     core_mode = 1;
     core_interval_modify({
