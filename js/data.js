@@ -55,7 +55,7 @@ function button_click(button_id){
     // Check if there are any enabled buttons left.
     let buttons_remain = false;
     do{
-        let disabled = button_values[loop_counter] < 0;
+        const disabled = button_values[loop_counter] < 0;
         document.getElementById(loop_counter).disabled = disabled;
 
         if(!disabled){
@@ -95,7 +95,7 @@ function start(){
 
     // Generate button pairs.
     let loop_counter = 19;
-    let tempinfo = [
+    const tempinfo = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
@@ -103,7 +103,7 @@ function start(){
     ];
     let temp = 0;
     do{
-        let element = document.getElementById(loop_counter);
+        const element = document.getElementById(loop_counter);
         element.disabled = false;
         element.style.background = colors['default'];
         element.value = ' ';
