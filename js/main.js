@@ -49,7 +49,7 @@ function repo_init(){
       'storage': {
         'display': '0123456789',
       },
-      'storage-menu': '<table><tr><td><input id=display><td>Display</table>',
+      'storage-menu': '<table><tr><td><input id=display maxlength=10><td>Display</table>',
       'title': 'Match.htm',
     });
     audio_create({
@@ -65,7 +65,6 @@ function repo_init(){
       ],
     });
 
-    // Setup buttons in game-div.
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
         if(loop_counter % 5 === 0
