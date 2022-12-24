@@ -6,7 +6,7 @@ function button_click(button_id){
     }
 
     let element = document.getElementById(button_id);
-    element.style.background = colors[button_values[button_id]];
+    element.style.backgroundColor = colors[button_values[button_id]];
     element.value = core_storage_data['display'][button_values[button_id]];
 
     let loop_counter = 19;
@@ -15,7 +15,7 @@ function button_click(button_id){
             if(button_values[loop_counter] > -1
               && loop_counter !== button_id){
                 element = document.getElementById(loop_counter);
-                element.style.background = colors['default'];
+                element.style.backgroundColor = colors['default'];
                 element.value = ' ';
             }
         }while(loop_counter--);
@@ -95,7 +95,7 @@ function start(){
     do{
         const element = document.getElementById(loop_counter);
         element.disabled = false;
-        element.style.background = colors['default'];
+        element.style.backgroundColor = colors['default'];
         element.value = ' ';
 
         do{

@@ -80,6 +80,6 @@ function repo_init(){
 
     let loop_counter = 19;
     do{
-        document.getElementById(loop_counter).style.background = colors['default'];
+        document.getElementById(loop_counter).style.backgroundColor = colors['default'];
     }while(loop_counter--);
 }
