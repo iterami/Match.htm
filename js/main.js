@@ -49,7 +49,7 @@ function repo_init(){
       'storage': {
         'display': '0123456789',
       },
-      'storage-menu': '<table><tr><td><input id=display maxlength=10><td>Display</table>',
+      'storage-menu': '<table><tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
     });
     audio_create({
