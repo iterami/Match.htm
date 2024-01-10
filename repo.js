@@ -140,11 +140,9 @@ function repo_init(){
         },
       },
     });
-    core_html_store({
-      'ids': [
-        'time',
-      ],
-    });
+    core_html_store([
+      'time',
+    ]);
 
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
