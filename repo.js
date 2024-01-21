@@ -7,7 +7,7 @@ function button_click(button_id){
 
     let element = document.getElementById(button_id);
     element.style.backgroundColor = colors[button_values[button_id]];
-    element.value = core_storage_data['display'][button_values[button_id]];
+    element.textContent = core_storage_data['display'][button_values[button_id]];
 
     let loop_counter = 19;
     if(selected_button[0] === -1){
@@ -16,7 +16,7 @@ function button_click(button_id){
               && loop_counter !== button_id){
                 element = document.getElementById(loop_counter);
                 element.style.backgroundColor = colors['default'];
-                element.value = ' ';
+                element.textContent = ' ';
             }
         }while(loop_counter--);
 
@@ -178,7 +178,7 @@ function start(){
         const element = document.getElementById(loop_counter);
         element.disabled = false;
         element.style.backgroundColor = colors['default'];
-        element.value = ' ';
+        element.textContent = ' ';
 
         do{
             temp = core_random_integer({
