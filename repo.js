@@ -118,7 +118,7 @@ function repo_init(){
         'selected_button': [-1, -1,],
         'time': 0,
       },
-      'info': '<input id=start-button type=button value=Restart>',
+      'info': '<button id=start-button type=button>Restart</button>',
       'menu': true,
       'reset': function(){
           stop();
@@ -151,9 +151,9 @@ function repo_init(){
             output += '<br>';
         }
         output +=
-          '<input class=gridbuttonclickable disabled id=' + loop_counter
+          '<button class=gridbuttonclickable disabled id=' + loop_counter
           + ' onclick=button_click(' + loop_counter
-          + ') type=button value=" ">';
+          + ') type=button> </button>';
     }
     document.getElementById('game-div').innerHTML = output + '<br>';
 
