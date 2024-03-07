@@ -40,9 +40,7 @@ function button_click(button_id){
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
 
-        audio_start({
-          'id': 'boop',
-        });
+        audio_start('boop');
     }
 
     let buttons_remain = false;
@@ -132,13 +130,6 @@ function repo_init(){
       },
       'storage-menu': '<table><tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
-    });
-    audio_create({
-      'audios': {
-        'boop': {
-          'duration': .1,
-        },
-      },
     });
     core_html_store([
       'time',
