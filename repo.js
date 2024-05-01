@@ -65,7 +65,6 @@ function button_click(button_id){
 
 function decisecond(){
     if(core_mode === 0){
-        stop();
         return;
     }
 
@@ -158,31 +157,18 @@ function start(){
     document.getElementById('attempted-matches').textContent = 0;
 
     let loop_counter = 19;
-    const tempinfo = [
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-      -1,-1,-1,-1,-1,
-    ];
-    let temp = 0;
+    const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
     do{
         const element = document.getElementById(loop_counter);
         element.disabled = false;
         element.style.backgroundColor = colors['default'];
         element.textContent = ' ';
 
-        do{
-            temp = core_random_integer({
-              'max': 20,
-            });
-        }while(tempinfo[temp] !== -1);
-
-        tempinfo[temp] = Math.floor(temp / 2);
-        button_values[loop_counter] = Math.floor(temp / 2);
+        button_values[loop_counter] = core_random_splice(temp);
     }while(loop_counter--);
 
     time = 0;
-    core_elements['time'].textContent = time;
+    core_elements['time'].textContent = 0;
 
     core_mode = 1;
     core_interval_modify({
