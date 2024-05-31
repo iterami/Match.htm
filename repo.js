@@ -130,9 +130,7 @@ function repo_init(){
       'storage-menu': '<table><tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
     });
-    core_html_store([
-      'time',
-    ]);
+    core_elements['time'] = document.getElementById('time');
 
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
