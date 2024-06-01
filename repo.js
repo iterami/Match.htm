@@ -30,11 +30,14 @@ function button_click(button_id){
         return;
     }
 
-    element = document.getElementById('attempted-matches');
-    element.textContent = Number.parseInt(
-      element.textContent,
-      10
-    ) + 1;
+    core_ui_update({
+      'ids': {
+        'attempted-matches': Number.parseInt(
+          core_elements['attempted-matches'].textContent,
+          10
+        ) + 1,
+      },
+    });
 
     if(selected_button[0] === button_values[button_id]){
         button_values[button_id] = -1;
@@ -72,9 +75,13 @@ function decisecond(){
       'decimals': 1,
       'number': Number.parseFloat(time) + .1,
     });
-    core_elements['time'].textContent = core_number_format({
-      'decimals-min': 1,
-      'number': time,
+    core_ui_update({
+      'ids': {
+        'time': core_number_format({
+          'decimals-min': 1,
+          'number': time,
+        }),
+      },
     });
 }
 
@@ -130,7 +137,6 @@ function repo_init(){
       'storage-menu': '<table><tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
     });
-    core_elements['time'] = document.getElementById('time');
 
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
@@ -152,8 +158,6 @@ function repo_init(){
 }
 
 function start(){
-    document.getElementById('attempted-matches').textContent = 0;
-
     let loop_counter = 19;
     const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
     do{
@@ -166,7 +170,12 @@ function start(){
     }while(loop_counter--);
 
     time = 0;
-    core_elements['time'].textContent = 0;
+    core_ui_update({
+      'ids': {
+        'attempted-matches': 0,
+        'time': 0,
+      },
+    });
 
     core_mode = 1;
     core_interval_modify({
