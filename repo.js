@@ -5,18 +5,16 @@ function button_click(button_id){
         return;
     }
 
-    let element = document.getElementById(button_id);
-    element.style.backgroundColor = colors[button_values[button_id]];
-    element.textContent = core_storage_data['display'][button_values[button_id]];
+    core_elements[button_id].style.backgroundColor = colors[button_values[button_id]];
+    core_elements[button_id].textContent = core_storage_data['display'][button_values[button_id]];
 
     let loop_counter = 19;
     if(selected_button[0] === -1){
         do{
             if(button_values[loop_counter] > -1
               && loop_counter !== button_id){
-                element = document.getElementById(loop_counter);
-                element.style.backgroundColor = colors['default'];
-                element.textContent = ' ';
+                core_elements[loop_counter].style.backgroundColor = colors['default'];
+                core_elements[loop_counter].textContent = ' ';
             }
         }while(loop_counter--);
 
@@ -25,7 +23,7 @@ function button_click(button_id){
           button_id,
         ];
 
-        document.getElementById(button_id).disabled = true;
+        core_elements[button_id].disabled = true;
 
         return;
     }
@@ -49,7 +47,7 @@ function button_click(button_id){
     let buttons_remain = false;
     do{
         const disabled = button_values[loop_counter] < 0;
-        document.getElementById(loop_counter).disabled = disabled;
+        core_elements[loop_counter].disabled = disabled;
 
         if(!disabled){
             buttons_remain = true;
@@ -153,7 +151,8 @@ function repo_init(){
 
     let loop_counter = 19;
     do{
-        document.getElementById(loop_counter).style.backgroundColor = colors['default'];
+        core_elements[loop_counter] = document.getElementById(loop_counter);
+        core_elements[loop_counter].style.backgroundColor = colors['default'];
     }while(loop_counter--);
 }
 
@@ -161,10 +160,9 @@ function start(){
     let loop_counter = 19;
     const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
     do{
-        const element = document.getElementById(loop_counter);
-        element.disabled = false;
-        element.style.backgroundColor = colors['default'];
-        element.textContent = ' ';
+        core_elements[loop_counter].disabled = false;
+        core_elements[loop_counter].style.backgroundColor = colors['default'];
+        core_elements[loop_counter].textContent = ' ';
 
         button_values[loop_counter] = core_random_splice(temp);
     }while(loop_counter--);
@@ -191,7 +189,7 @@ function stop(){
 
     let loop_counter = 19;
     do{
-        document.getElementById(loop_counter).disabled = true;
+        core_elements[loop_counter].disabled = true;
     }while(loop_counter--);
 
     button_values = [
