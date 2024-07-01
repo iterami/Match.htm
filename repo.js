@@ -13,7 +13,7 @@ function button_click(button_id){
         do{
             if(button_values[loop_counter] > -1
               && loop_counter !== button_id){
-                core_elements[loop_counter].style.backgroundColor = colors['default'];
+                core_elements[loop_counter].style.backgroundColor = '';
                 core_elements[loop_counter].textContent = ' ';
             }
         }while(loop_counter--);
@@ -105,7 +105,6 @@ function repo_init(){
           -1,-1,-1,-1,-1,
         ],
         'colors': {
-          'default': '#2a2a2a',
           '0': '#c83232',
           '1': '#ff7d0a',
           '2': '#2d8930',
@@ -152,7 +151,7 @@ function repo_init(){
     let loop_counter = 19;
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
-        core_elements[loop_counter].style.backgroundColor = colors['default'];
+        core_elements[loop_counter].style.backgroundColor = '';
     }while(loop_counter--);
 }
 
@@ -161,7 +160,7 @@ function start(){
     const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
     do{
         core_elements[loop_counter].disabled = false;
-        core_elements[loop_counter].style.backgroundColor = colors['default'];
+        core_elements[loop_counter].style.backgroundColor = '';
         core_elements[loop_counter].textContent = ' ';
 
         button_values[loop_counter] = core_random_splice(temp);
