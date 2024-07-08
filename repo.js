@@ -130,8 +130,12 @@ function repo_init(){
       },
       'storage': {
         'display': '0123456789',
+        'height': 50,
+        'width': 50,
       },
-      'storage-menu': '<table><tr><td><input id=display maxlength=10 type=text><td>Display</table>',
+      'storage-menu': '<table><tr><td><input class=mini id=height min=1 step=any type=number><td>Button Height'
+        + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Button Width'
+        + '<tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
     });
 
@@ -152,6 +156,8 @@ function repo_init(){
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
         core_elements[loop_counter].style.backgroundColor = '';
+        core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
+        core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
     }while(loop_counter--);
 }
 
@@ -161,6 +167,8 @@ function start(){
     do{
         core_elements[loop_counter].disabled = false;
         core_elements[loop_counter].style.backgroundColor = '';
+        core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
+        core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
         core_elements[loop_counter].textContent = ' ';
 
         button_values[loop_counter] = core_random_splice(temp);
