@@ -5,6 +5,7 @@ function button_click(button_id){
         return;
     }
 
+    core_elements[button_id].blur();
     core_elements[button_id].style.backgroundColor = colors[button_values[button_id]];
     core_elements[button_id].textContent = core_storage_data['display'][button_values[button_id]];
 
