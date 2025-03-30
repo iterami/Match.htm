@@ -41,6 +41,8 @@ function button_click(button_id){
     if(selected_button[0] === button_values[button_id]){
         button_values[button_id] = -1;
         button_values[selected_button[1]] = -1;
+        core_elements[button_id].style.color = '#fff';
+        core_elements[selected_button[1]].style.color = '#fff';
 
         audio_start('boop');
     }
@@ -168,6 +170,7 @@ function start(){
     do{
         core_elements[loop_counter].disabled = false;
         core_elements[loop_counter].style.backgroundColor = '';
+        core_elements[loop_counter].style.color = '#000';
         core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
         core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
         core_elements[loop_counter].textContent = ' ';
