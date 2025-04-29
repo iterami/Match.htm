@@ -89,7 +89,7 @@ function decisecond(){
 function repo_escape(){
     if(!core_intervals['interval']
       && !core_menu_open){
-        core_repo_reset();
+        reset();
     }
 }
 
@@ -97,7 +97,7 @@ function repo_init(){
     core_repo_init({
       'events': {
         'start-button': {
-          'onclick': core_repo_reset,
+          'onclick': reset,
         },
       },
       'globals': {
@@ -124,13 +124,6 @@ function repo_init(){
       },
       'info': '<button id=start-button type=button>Restart</button>',
       'menu': true,
-      'reset': function(){
-          stop();
-          if(core_menu_open){
-              core_escape();
-          }
-          start();
-      },
       'storage': {
         'display': '0123456789',
         'height': 50,
@@ -162,6 +155,14 @@ function repo_init(){
         core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
         core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
     }while(loop_counter--);
+}
+
+function reset(){
+    stop();
+    if(core_menu_open){
+        core_escape();
+    }
+    start();
 }
 
 function start(){
