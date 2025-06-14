@@ -148,7 +148,7 @@ function repo_init(){
           + ' onclick=button_click(' + loop_counter
           + ') type=button> </button>';
     }
-    document.getElementById('game-div').innerHTML = output + '<br>';
+    document.getElementById('game').innerHTML = output + '<br>';
 
     let loop_counter = 19;
     do{
