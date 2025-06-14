@@ -7,7 +7,7 @@ function button_click(button_id){
 
     core_elements[button_id].blur();
     core_elements[button_id].style.backgroundColor = colors[button_values[button_id]];
-    core_elements[button_id].textContent = core_storage_data['display'][button_values[button_id]];
+    core_elements[button_id].textContent = core_storage_data.display[button_values[button_id]];
 
     let loop_counter = 19;
     if(selected_button[0] === -1){
@@ -31,8 +31,8 @@ function button_click(button_id){
 
     core_ui_update({
       'ids': {
-        'attempted-matches': Number.parseInt(
-          core_elements['attempted-matches'].textContent,
+        'attempts': Number.parseInt(
+          core_elements.attempts.textContent,
           10
         ) + 1,
       },
@@ -87,7 +87,7 @@ function decisecond(){
 }
 
 function repo_escape(){
-    if(!core_intervals['interval']
+    if(!core_intervals.interval
       && !core_menu_open){
         reset();
     }
@@ -139,7 +139,7 @@ function repo_init(){
 
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % core_storage_data['length'] === 0
+        if(loop_counter % core_storage_data.length === 0
           && loop_counter !== 0){
             output += '<br>';
         }
@@ -154,8 +154,8 @@ function repo_init(){
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
         core_elements[loop_counter].style.backgroundColor = '';
-        core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
-        core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
+        core_elements[loop_counter].style.height = core_storage_data.height + 'px';
+        core_elements[loop_counter].style.width = core_storage_data.width + 'px';
     }while(loop_counter--);
 }
 
@@ -178,8 +178,8 @@ function start(){
         core_elements[loop_counter].disabled = false;
         core_elements[loop_counter].style.backgroundColor = '';
         core_elements[loop_counter].style.color = '#000';
-        core_elements[loop_counter].style.height = core_storage_data['height'] + 'px';
-        core_elements[loop_counter].style.width = core_storage_data['width'] + 'px';
+        core_elements[loop_counter].style.height = core_storage_data.height + 'px';
+        core_elements[loop_counter].style.width = core_storage_data.width + 'px';
         core_elements[loop_counter].textContent = ' ';
 
         button_values[loop_counter] = core_random_splice(temp);
@@ -188,7 +188,7 @@ function start(){
     time = 0;
     core_ui_update({
       'ids': {
-        'attempted-matches': 0,
+        'attempts': 0,
         'time': 0,
       },
     });
