@@ -130,7 +130,7 @@ function repo_init(){
         'length': 5,
         'width': 50,
       },
-      'storage-menu': '<table><tr><td><input class=mini id=height min=1 step=any type=number><td>Button Height'
+      'storage_menu': '<table><tr><td><input class=mini id=height min=1 step=any type=number><td>Button Height'
         + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Button Width'
         + '<tr><td><input class=mini id=length max=20 min=1 step=1 type=number><td>Length'
         + '<tr><td><input id=display maxlength=10 type=text><td>Display</table>',
