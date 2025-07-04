@@ -63,7 +63,12 @@ function button_click(button_id){
     ];
 
     if(!buttons_remain){
-        stop();
+        core_mode = 0;
+        core_interval_pause_all();
+        let loop_counter = 19;
+        do{
+            core_elements[loop_counter].disabled = true;
+        }while(loop_counter--);
     }
 }
 
@@ -89,15 +94,15 @@ function decisecond(){
 function repo_escape(){
     if(!core_intervals.interval
       && !core_menu_open){
-        reset();
+        start();
     }
 }
 
 function repo_init(){
     core_repo_init({
       'events': {
-        'start-button': {
-          'onclick': reset,
+        'start_button': {
+          'onclick': start,
         },
       },
       'globals': {
@@ -122,94 +127,26 @@ function repo_init(){
         'selected_button': [-1, -1,],
         'time': 0,
       },
-      'info': '<button id=start-button type=button>Restart</button>',
+      'info': '<button id=start_button type=button>Restart</button>',
       'menu': true,
       'storage': {
         'display': '0123456789',
-        'height': 50,
+        'height': '50px',
         'length': 5,
-        'width': 50,
+        'width': '50px',
       },
-      'storage_menu': '<table><tr><td><input class=mini id=height min=1 step=any type=number><td>Button Height'
-        + '<tr><td><input class=mini id=width min=1 step=any type=number><td>Button Width'
+      'storage_menu': '<table><tr><td><input class=mini id=height type=text><td>Button Height'
+        + '<tr><td><input class=mini id=width type=text><td>Button Width'
         + '<tr><td><input class=mini id=length max=20 min=1 step=1 type=number><td>Length'
         + '<tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
+      'ui_elements': [
+        'game',
+      ],
     });
-
-    let output = '';
-    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % core_storage_data.length === 0
-          && loop_counter !== 0){
-            output += '<br>';
-        }
-        output +=
-          '<button class=gridbuttonclickable disabled id=' + loop_counter
-          + ' onclick=button_click(' + loop_counter
-          + ') type=button> </button>';
-    }
-    document.getElementById('game').innerHTML = output + '<br>';
-
-    let loop_counter = 19;
-    do{
-        core_elements[loop_counter] = document.getElementById(loop_counter);
-        core_elements[loop_counter].style.backgroundColor = '';
-        core_elements[loop_counter].style.height = core_storage_data.height + 'px';
-        core_elements[loop_counter].style.width = core_storage_data.width + 'px';
-    }while(loop_counter--);
 }
 
 function reset(){
-    if(time > 0
-      && !globalThis.confirm('Start new game?')){
-        return;
-    }
-    stop();
-    if(core_menu_open){
-        core_escape();
-    }
-    start();
-}
-
-function start(){
-    let loop_counter = 19;
-    const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
-    do{
-        core_elements[loop_counter].disabled = false;
-        core_elements[loop_counter].style.backgroundColor = '';
-        core_elements[loop_counter].style.color = '#000';
-        core_elements[loop_counter].style.height = core_storage_data.height + 'px';
-        core_elements[loop_counter].style.width = core_storage_data.width + 'px';
-        core_elements[loop_counter].textContent = ' ';
-
-        button_values[loop_counter] = core_random_splice(temp);
-    }while(loop_counter--);
-
-    time = 0;
-    core_ui_update({
-      'ids': {
-        'attempts': 0,
-        'time': 0,
-      },
-    });
-
-    core_mode = 1;
-    core_interval_modify({
-      'id': 'interval',
-      'interval': 100,
-      'todo': decisecond,
-    });
-}
-
-function stop(){
-    core_interval_pause_all();
-    core_mode = 0;
-
-    let loop_counter = 19;
-    do{
-        core_elements[loop_counter].disabled = true;
-    }while(loop_counter--);
-
     button_values = [
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
@@ -220,4 +157,63 @@ function stop(){
       -1,
       -1,
     ];
+
+    let output = '';
+    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
+        if(loop_counter % core_storage_data.length === 0
+          && loop_counter !== 0){
+            output += '<br>';
+        }
+        output +=
+          '<button class=gridbuttonclickable id=' + loop_counter
+          + ' onclick=button_click(' + loop_counter + ') type=button></button>';
+    }
+    core_elements.game.innerHTML = output + '<br>';
+
+    for(const element in core_elements){
+        if(!globalThis.isNaN(element)){
+            delete core_elements[element];
+        }
+    }
+    let loop_counter = 19;
+    const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
+    do{
+        core_elements[loop_counter] = document.getElementById(loop_counter);
+        core_elements[loop_counter].disabled = false;
+        core_elements[loop_counter].style.backgroundColor = '';
+        core_elements[loop_counter].style.color = '#000';
+        core_elements[loop_counter].style.height = core_storage_data.height;
+        core_elements[loop_counter].style.width = core_storage_data.width;
+        core_elements[loop_counter].textContent = ' ';
+
+        button_values[loop_counter] = core_random_splice(temp);
+    }while(loop_counter--);
+
+    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * core_storage_data.length + core_storage_data.length * 2) + 'px';
+
+    time = 0;
+    core_ui_update({
+      'ids': {
+        'attempts': 0,
+        'time': 0,
+      },
+    });
+}
+
+function start(){
+    if(time > 0
+      && !globalThis.confirm('Start new game?')){
+        return;
+    }
+    if(core_menu_open){
+        core_escape();
+    }
+    reset();
+
+    core_mode = 1;
+    core_interval_modify({
+      'id': 'interval',
+      'interval': 100,
+      'todo': decisecond,
+    });
 }
