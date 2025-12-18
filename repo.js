@@ -101,7 +101,7 @@ function repo_escape(){
 function repo_init(){
     core_repo_init({
       'events': {
-        'restart': {
+        'start': {
           'onclick': start,
         },
       },
@@ -127,7 +127,7 @@ function repo_init(){
         'selected_button': [-1, -1,],
         'time': 0,
       },
-      'info': '<button id=restart type=button>Restart</button>',
+      'info': '<button id=start type=button>Start New Game</button>',
       'menu': true,
       'storage': {
         'display': '0123456789',
