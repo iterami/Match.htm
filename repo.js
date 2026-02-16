@@ -63,8 +63,7 @@ function button_click(button_id){
     ];
 
     if(!buttons_remain){
-        core_mode = 0;
-        core_interval_pause_all();
+        core_interval_lock('interval');
         let loop_counter = 19;
         do{
             core_elements[loop_counter].disabled = true;
@@ -73,10 +72,6 @@ function button_click(button_id){
 }
 
 function decisecond(){
-    if(core_mode === 0){
-        return;
-    }
-
     time = core_round({
       'decimals': 1,
       'number': Number.parseFloat(time) + .1,
@@ -210,7 +205,6 @@ function start(){
     }
     reset();
 
-    core_mode = 1;
     core_interval_modify({
       'id': 'interval',
       'interval': 100,
