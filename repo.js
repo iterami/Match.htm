@@ -139,6 +139,22 @@ function repo_init(){
         'game',
       ],
     });
+
+    let output = '';
+    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
+        if(loop_counter % core_storage_data.length === 0
+          && loop_counter !== 0){
+            output += '<br>';
+        }
+        output += '<button class=gridbuttonclickable id=' + loop_counter
+          + ' onclick=button_click(' + loop_counter + ') type=button></button>';
+    }
+    core_elements.game.innerHTML = output;
+
+    let loop_counter = 19;
+    do{
+        core_elements[loop_counter] = document.getElementById(loop_counter);
+    }while(loop_counter--);
 }
 
 function reset(){
@@ -153,27 +169,9 @@ function reset(){
       -1,
     ];
 
-    let output = '';
-    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % core_storage_data.length === 0
-          && loop_counter !== 0){
-            output += '<br>';
-        }
-        output +=
-          '<button class=gridbuttonclickable id=' + loop_counter
-          + ' onclick=button_click(' + loop_counter + ') type=button></button>';
-    }
-    core_elements.game.innerHTML = output;
-
-    for(const element in core_elements){
-        if(!globalThis.isNaN(element)){
-            delete core_elements[element];
-        }
-    }
     let loop_counter = 19;
     const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
     do{
-        core_elements[loop_counter] = document.getElementById(loop_counter);
         core_elements[loop_counter].disabled = false;
         core_elements[loop_counter].style.backgroundColor = '';
         core_elements[loop_counter].style.color = '#000';
