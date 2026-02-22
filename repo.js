@@ -163,7 +163,7 @@ function reset(){
           '<button class=gridbuttonclickable id=' + loop_counter
           + ' onclick=button_click(' + loop_counter + ') type=button></button>';
     }
-    core_elements.game.innerHTML = output + '<br>';
+    core_elements.game.innerHTML = output;
 
     for(const element in core_elements){
         if(!globalThis.isNaN(element)){
