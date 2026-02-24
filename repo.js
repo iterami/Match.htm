@@ -153,8 +153,6 @@ function repo_init(){
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
     }while(loop_counter--);
-
-    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
 }
 
 function reset(){
@@ -181,6 +179,8 @@ function reset(){
 
         button_values[loop_counter] = core_random_splice(temp);
     }while(loop_counter--);
+
+    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
 
     time = 0;
     core_ui_update({
