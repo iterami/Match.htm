@@ -127,12 +127,10 @@ function repo_init(){
       'storage': {
         'display': '0123456789',
         'height': '50px',
-        'length': 5,
         'width': '50px',
       },
       'storage_menu': '<table><tr><td><input class=mini id=height type=text><td>Button Height'
         + '<tr><td><input class=mini id=width type=text><td>Button Width'
-        + '<tr><td><input class=mini id=length max=20 min=1 step=1 type=number><td>Length'
         + '<tr><td><input id=display maxlength=10 type=text><td>Display</table>',
       'title': 'Match.htm',
       'ui_elements': [
@@ -142,7 +140,7 @@ function repo_init(){
 
     let output = '';
     for(let loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % core_storage_data.length === 0
+        if(loop_counter % 5 === 0
           && loop_counter !== 0){
             output += '<br>';
         }
@@ -155,6 +153,8 @@ function repo_init(){
     do{
         core_elements[loop_counter] = document.getElementById(loop_counter);
     }while(loop_counter--);
+
+    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
 }
 
 function reset(){
@@ -181,8 +181,6 @@ function reset(){
 
         button_values[loop_counter] = core_random_splice(temp);
     }while(loop_counter--);
-
-    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * core_storage_data.length + core_storage_data.length * 2) + 'px';
 
     time = 0;
     core_ui_update({
