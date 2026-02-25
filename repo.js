@@ -9,15 +9,14 @@ function button_click(button_id){
     core_elements[button_id].style.backgroundColor = colors[button_values[button_id]];
     core_elements[button_id].textContent = core_storage_data.display[button_values[button_id]];
 
-    let loop_counter = 19;
     if(selected_button[0] === -1){
-        do{
-            if(button_values[loop_counter] > -1
-              && loop_counter !== button_id){
-                core_elements[loop_counter].style.backgroundColor = '';
-                core_elements[loop_counter].textContent = ' ';
+        for(let i = 0; i < 20; i++){
+            if(button_values[i] > -1
+              && i !== button_id){
+                core_elements[i].style.backgroundColor = '';
+                core_elements[i].textContent = ' ';
             }
-        }while(loop_counter--);
+        }
 
         selected_button = [
           button_values[button_id],
@@ -48,14 +47,14 @@ function button_click(button_id){
     }
 
     let buttons_remain = false;
-    do{
-        const disabled = button_values[loop_counter] < 0;
-        core_elements[loop_counter].disabled = disabled;
+    for(let i = 0; i < 20; i++){
+        const disabled = button_values[i] < 0;
+        core_elements[i].disabled = disabled;
 
         if(!disabled){
             buttons_remain = true;
         }
-    }while(loop_counter--);
+    }
 
     selected_button = [
       -1,
@@ -64,10 +63,9 @@ function button_click(button_id){
 
     if(!buttons_remain){
         core_interval_lock('interval');
-        let loop_counter = 19;
-        do{
-            core_elements[loop_counter].disabled = true;
-        }while(loop_counter--);
+        for(let i = 0; i < 20; i++){
+            core_elements[i].disabled = true;
+        }
     }
 }
 
@@ -139,20 +137,19 @@ function repo_init(){
     });
 
     let output = '';
-    for(let loop_counter = 0; loop_counter < 20; loop_counter++){
-        if(loop_counter % 5 === 0
-          && loop_counter !== 0){
+    for(let i = 0; i < 20; i++){
+        if(i % 5 === 0
+          && i !== 0){
             output += '<br>';
         }
-        output += '<button class=gridbuttonclickable id=' + loop_counter
-          + ' onclick=button_click(' + loop_counter + ') type=button></button>';
+        output += '<button class=gridbuttonclickable id=' + i
+          + ' onclick=button_click(' + i + ') type=button></button>';
     }
     core_elements.game.innerHTML = output;
 
-    let loop_counter = 19;
-    do{
-        core_elements[loop_counter] = document.getElementById(loop_counter);
-    }while(loop_counter--);
+    for(let i = 0; i < 20; i++){
+        core_elements[i] = document.getElementById(i);
+    }
 }
 
 function reset(){
@@ -167,18 +164,17 @@ function reset(){
       -1,
     ];
 
-    let loop_counter = 19;
-    const temp = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
-    do{
-        core_elements[loop_counter].disabled = false;
-        core_elements[loop_counter].style.backgroundColor = '';
-        core_elements[loop_counter].style.color = '#000';
-        core_elements[loop_counter].style.height = core_storage_data.height;
-        core_elements[loop_counter].style.width = core_storage_data.width;
-        core_elements[loop_counter].textContent = ' ';
+    const values = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
+    for(let i = 0; i < 20; i++){
+        core_elements[i].disabled = false;
+        core_elements[i].style.backgroundColor = '';
+        core_elements[i].style.color = '#000';
+        core_elements[i].style.height = core_storage_data.height;
+        core_elements[i].style.width = core_storage_data.width;
+        core_elements[i].textContent = ' ';
 
-        button_values[loop_counter] = core_random_splice(temp);
-    }while(loop_counter--);
+        button_values[i] = core_random_splice(values);
+    }
 
     core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
 
