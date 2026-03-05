@@ -6,7 +6,7 @@ function button_click(button_id){
     }
 
     core_elements[button_id].blur();
-    core_elements[button_id].style.backgroundColor = colors[button_values[button_id]];
+    core_elements[button_id].style.backgroundColor = core_storage_data['color' + button_values[button_id]];
     core_elements[button_id].textContent = core_storage_data.display[button_values[button_id]];
 
     if(selected_button[0] === -1){
@@ -105,31 +105,34 @@ function repo_init(){
           -1,-1,-1,-1,-1,
           -1,-1,-1,-1,-1,
         ],
-        'colors': {
-          '0': '#c83232',
-          '1': '#ff7d0a',
-          '2': '#2d8930',
-          '3': '#6cd',
-          '4': '#f58cba',
-          '5': '#476291',
-          '6': '#fd0',
-          '7': '#8650ac',
-          '8': '#c79c6e',
-          '9': '#70550f',
-        },
         'selected_button': [-1, -1,],
         'time': 0,
       },
       'info': '<button class=medium id=start type=button>Start New Game</button>',
       'menu': true,
       'storage': {
+        'color0': '#c83232',
+        'color1': '#ff7d0a',
+        'color2': '#2d8930',
+        'color3': '#6cd',
+        'color4': '#f58cba',
+        'color5': '#476291',
+        'color6': '#fd0',
+        'color7': '#8650ac',
+        'color8': '#c79c6e',
+        'color9': '#70550f',
         'display': '0123456789',
         'height': '50px',
         'width': '50px',
       },
       'storage_menu': '<table><tr><td><input class=mini id=height type=text><td>Button Height'
         + '<tr><td><input class=mini id=width type=text><td>Button Width'
-        + '<tr><td><input id=display maxlength=10 type=text><td>Display</table>',
+        + '<tr><td><input id=display maxlength=10 type=text><td>Display'
+        + '<tr><td>0<input id=color0 type=color><br>'
+          + '1<input id=color1 type=color> 2<input id=color2 type=color> 3<input id=color3 type=color><br>'
+          + '4<input id=color4 type=color> 5<input id=color5 type=color> 6<input id=color6 type=color><br>'
+          + '7<input id=color7 type=color> 8<input id=color8 type=color> 9<input id=color9 type=color><td>Colors'
+        + '</table>',
       'title': 'Match.htm',
       'ui_elements': [
         'game',
