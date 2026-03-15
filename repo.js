@@ -125,8 +125,7 @@ function repo_init(){
         'height': '50px',
         'width': '50px',
       },
-      'storage_menu': '<table><tr><td><input class=mini id=height type=text><td>Button Height'
-        + '<tr><td><input class=mini id=width type=text><td>Button Width'
+      'storage_menu': '<table><tr><td><input class=mini id=height type=text>x<input class=mini id=width type=text><td>Button Size'
         + '<tr><td><input id=display maxlength=10 type=text><td>Display'
         + '<tr><td>0<input id=color0 type=color><br>'
           + '1<input id=color1 type=color> 2<input id=color2 type=color> 3<input id=color3 type=color><br>'
