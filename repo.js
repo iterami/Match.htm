@@ -152,6 +152,8 @@ function repo_init(){
     for(let i = 0; i < 20; i++){
         core_elements[i] = document.getElementById(i);
     }
+
+    update_css();
 }
 
 function reset(){
@@ -178,7 +180,7 @@ function reset(){
         button_values[i] = core_random_splice(values);
     }
 
-    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
+    update_css();
 
     time = 0;
     core_ui_update({
@@ -202,4 +204,8 @@ function start(){
       'interval': 100,
       'todo': decisecond,
     });
+}
+
+function update_css(){
+    core_elements.game.style.minWidth = (core_elements[0].offsetWidth * 5 + 10) + 'px';
 }
