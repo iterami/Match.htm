@@ -56,10 +56,7 @@ function button_click(button_id){
         }
     }
 
-    selected_button = [
-      -1,
-      -1,
-    ];
+    selected_button = [-1, -1];
 
     if(!buttons_remain){
         core_interval_lock('interval');
@@ -107,7 +104,7 @@ function repo_init(){
           -1,-1,-1,-1,-1,
           -1,-1,-1,-1,-1,
         ],
-        'selected_button': [-1, -1,],
+        'selected_button': [-1, -1],
         'time': 0,
       },
       'info': '<button class=medium id=start type=button>Start New Game</button>',
@@ -165,12 +162,9 @@ function reset(){
       -1,-1,-1,-1,-1,
       -1,-1,-1,-1,-1,
     ];
-    selected_button = [
-      -1,
-      -1,
-    ];
+    selected_button = [-1, -1];
 
-    const values = [0,0,1,1,2,2,3,3,4,4,5,5,6,6,7,7,8,8,9,9,];
+    const values = [0, 0, 1, 1, 2, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9];
     for(let i = 0; i < 20; i++){
         core_elements[i].disabled = false;
         core_elements[i].style.backgroundColor = '';
